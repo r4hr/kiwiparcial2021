@@ -1,6 +1,6 @@
 ---
 title: "Encuesta KIWI de Sueldos de RRHH de LATAM"
-subtitle: "Resultados Parciales 2020"
+subtitle: "Resultados Parciales 2021"
 output:
   xaringan::moon_reader:
     seal: false
@@ -24,19 +24,19 @@ knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
 ```{r metathis, echo=FALSE}
 library(metathis)
 meta() %>%
-  meta_name("github-repo" = "r4hr/kiwi2020") %>% 
+  meta_name("github-repo" = "r4hr/kiwiparcial2021") %>% 
   meta_social(
     title = "Encuesta KIWI de Sueldos de RRHH de LATAM",
     description = paste(
-      "Respuestas parciales de la 1° Encuesta KIWI de Sueldos de RRHH de LATAM",
-      "Desarrollado por el Club de R para RRHH."
+      "Respuestas parciales de la 2° Encuesta KIWI de Sueldos de RRHH de LATAM",
+      "Desarrollado por R4HR Club de R para RRHH."
     ),
     url = "https://kiwi-parcial.netlify.app/",
-    image = "https://github.com/r4hr/kiwi2020/blob/main/kiwi-cover.png?raw=true",
+    image = "https://github.com/r4hr/kiwiparcial2021/blob/main/archivos/kiwi-cover.png?raw=true",
     image_alt = paste(
       "Encuesta KIWI de Sueldos de RRHH de LATAM:", 
-      "Respuestas parciales de algunas preguntas de la 1° Encuesta KIWI de Sueldos de RRHH de LATAM", 
-      "Desarrollada por el Club de R para RRHH"
+      "Respuestas parciales de algunas preguntas de la 2° Encuesta KIWI de Sueldos de RRHH de LATAM", 
+      "Desarrollada por R4HR Club de R para RRHH"
     ),
     og_type = "website",
     og_author = "Sergio Garcia Mora",
@@ -160,7 +160,7 @@ fuente <- "Fuente: Encuesta KIWI de Sueldos de RRHH para Latam"
 
 colores <-  c("#8624F5", "#1FC3AA")
 
-kiwi <- sheets_read("1aeuu9dVfN42EjyvbmhEcsf0ilSz2DiXU-0MpnF896ss")
+kiwi <- read_sheet("1aeuu9dVfN42EjyvbmhEcsf0ilSz2DiXU-0MpnF896ss")
 
 paises <- kiwi %>% 
   select(`País en el que trabajas`) %>% 
