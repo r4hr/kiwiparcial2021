@@ -13,7 +13,7 @@ output:
 
 ---
 class: inverse, top, center
-background-image: url(kiwi-fondo.png)
+background-image: url(archivos/kiwi-fondo.png)
 background-size: cover
 
 ```{r setup, include=FALSE}
@@ -59,11 +59,11 @@ Image credit: [Designed by Freepik]("http://www.freepik.com")
 ---
 # Quiénes somos
 
-El [Club de R para RRHH](https://r4hr.club) es una comunidad de aprendizaje de programación en R destinada para las personas que trabajan en Recursos Humanos de habla hispana.
+[R4HR Club de R para RRHH](https://r4hr.club) es una comunidad de aprendizaje de programación en R destinada para las personas que trabajan o quieran trabajar en Recursos Humanos de habla hispana.
 
-Nuestro objetivo es acercar el mundo de ciencias de datos a nuestra profesión, adaptando el contenido a nuestros skills y conocimientos, y también siempre que podemos, usando datos relacionados con la gestión de personas, y en castellano, para hacer más accesible el aprendizaje.
+Nuestro objetivo es acercar el mundo de ciencias de datos a nuestra profesión, adaptando el contenido a nuestras habilidades y conocimientos, y también siempre que podemos, usando datos relacionados con la gestión de personas, y en castellano, para hacer más accesible el aprendizaje.
 
-Este es un proyecto que ideó [Sergio García Mora](https://www.linkedin.com/in/sergiogarciamora/), y que reúne a gente de Argentina, Perú, Chile, Paraguay, Uruguay, Panamá, USA, Francia, y cada vez más y más profesionales de distintas latitudes se unen y contribuyen al proyecto.
+Este es un proyecto que reúne a gente de Argentina, Perú, Chile, Paraguay, Uruguay, Panamá, USA, Francia, España, Ecuador, Colombia y cada vez a más y más profesionales de distintas latitudes se unen y contribuyen al proyecto.
 
 Para más información sobre el Club de R leé [este post](https://r4hr.club/2020/09/23/el-club-de-r-para-rrhh/), o escribinos a [info@r4hr.club](mailto:info@r4hr.club).
 
@@ -73,7 +73,7 @@ Para más información sobre el Club de R leé [este post](https://r4hr.club/202
 
 Uno de los problemas en el aprendizaje de People Analytics es la falta de datasets para practicar, así que una decisión que tomamos fue el de generar nuestro propio dataset y de abrirlo para toda la comunidad.
 
-Para hacer esta encuesta nos "inspiramos" en [SysArmy](https://sysarmy.com/blog/), una comunidad para las personas que trabajan en tecnología que además de organizar uno de los eventos más importantes de tecnología de Argentina, Nerdearla, y que también organizan una encuesta salarial dos veces por año.
+Para hacer esta encuesta nos "inspiramos" en [SysArmy](https://sysarmy.com/blog/), una comunidad para las personas que trabajan en tecnología que además de organizar uno de los eventos más importantes de tecnología de Argentina, Nerdearla, también organizan una encuesta salarial dos veces por año.
 
 Estas son las motivaciones detrás de esta encuesta. Tener nuestro propio dataset, compartir los resultados y los datos, para que todos los entusiastas de RRHH y de los datos cuenten con una fuente de datos para practicar.
 
@@ -84,17 +84,11 @@ background-color: "#5d6d7e"
 # Quiénes somos
 ## Organizadores
 .pull-left[
-`r emo::ji("male_detective")` [Adrián Quiroga](https://www.linkedin.com/in/adrian-quiroga-ab57424b/) 
-
 `r emo::ji("woman_technologist")` [Alithu Castro](https://www.linkedin.com/in/alithucastro/)
-
-`r emo::ji("woman_student")` [Andrea Herpsomer](https://www.linkedin.com/in/andreaherpsomer/)
 
 `r emo::ji("woman_artist")` [Carla Cirone](https://www.linkedin.com/in/carla-cirone-0566b095/)
 
 `r emo::ji("woman_technologist")` [Daniela García](https://www.linkedin.com/in/claudia-daniela-garcia-138b1a14b/)
-
-`r emo::ji("woman_astronaut")` [Lucía Huilén Gómez](https://www.linkedin.com/in/luc%C3%ADa-huil%C3%A9n-g%C3%B3mez-93565276/)
 
 `r emo::ji("man_singer")` [Santiago Lardone Quinodoz](https://www.linkedin.com/in/santiago-lardone-quinodoz-978588167/)
 
@@ -105,7 +99,7 @@ background-color: "#5d6d7e"
 `r emo::ji("woman_teacher")` [Yanel Paulette](https://www.linkedin.com/in/yanelpaulette/)
 ]
 
-.pull-right[<img src="kiwi-happy.jpg"  />]
+.pull-right[<img src="archivos/kiwi-happy.jpg"  />]
 ---
 background-color: "#5d6d7e" 
 # ¿Aún no completaste la encuesta?
@@ -117,10 +111,10 @@ background-color: "#5d6d7e"
 
 .pull-right[
 <br><br><br><br>
-### Completá la encuesta en [este link](https://bit.ly/sueldos-rh)
+### Completá la encuesta en [este link](https://bit.ly/kiwi2021)
 
 <br>
-### El tiempo aproximado para completarla es de 6'52" #chequeadísimo `r emo::ji("engineer")`
+### El tiempo aproximado para completarla es de 7'26" #chequeadísimo `r emo::ji("engineer")`
 
 ]
 
@@ -130,7 +124,7 @@ class: inverse, center, middle
 
 <img src="https://media.giphy.com/media/xThtalkAxYnZd94uB2/giphy.gif" />
 
-El 12 de noviembre publicamos los resultados finales.
+El 30 de noviembre publicamos los resultados finales.
 
 ---
 # Participación
@@ -161,21 +155,84 @@ fuente <- "Fuente: Encuesta KIWI de Sueldos de RRHH para Latam"
 colores <-  c("#8624F5", "#1FC3AA")
 
 kiwi <- read_sheet("1aeuu9dVfN42EjyvbmhEcsf0ilSz2DiXU-0MpnF896ss")
+kiwi21 <- read_sheet("1nhpqDWuJoWhiVj0rIaV51-SdfnSxTpbV3Vcd3iYmyTw")
+# Tipo de cambio
+tc <- read_sheet("194DbwO2TNmYkWU5Ru1m6UxuOCfXxuRlFcrWrP_JzGv8") %>% 
+  select(pais, tipo_cambio)
 
-paises <- kiwi %>% 
-  select(`País en el que trabajas`) %>% 
+paises <- kiwi21 %>% 
+  select(pais = `País en el que trabajas`) %>% 
   mutate(cuenta = 1) %>% 
-  group_by(`País en el que trabajas`) %>% 
-  summarise(Cuenta = sum(cuenta)) %>% 
-  filter(Cuenta > 4) %>% 
-  arrange(-Cuenta)
+  group_by(pais) %>% 
+  summarise(conteo = sum(cuenta)) %>% 
+  filter(conteo > 4) %>% 
+  arrange(-conteo)
 
 gt(paises) %>% 
   tab_header(title = "Cantidad de respuestas por país",
              subtitle = "Países con más de 5 respuestas") 
 ```
 <br>
-Recibimos un total de `r nrow(kiwi)` respuestas `r emo::ji("party")`.
+Recibimos un total de `r nrow(kiwi21)` respuestas `r emo::ji("party")`.
+
+---
+# Participantes
+
+.pull-left[
+En esta encuesta participan tanto trabajadores en relación de dependencia, como trabajadores freelancers.
+
+La representación de ambos tipos de trabajadores es la siguiente:
+]
+.pull-right[
+```{r tipo_trabajo}
+trabajo_tipo <- kiwi21 %>% 
+  count(Trabajo) %>% 
+  mutate(porcentaje = n/sum(n)) %>% 
+  arrange(-n)
+
+# Acomoda el texto en renglones
+trabajo_tipo$Trabajo <- str_wrap(trabajo_tipo$Trabajo, width = 13)
+
+# Calculamos los límites superiores de cada rectángulo
+trabajo_tipo$ymax <- cumsum(trabajo_tipo$porcentaje)
+
+# Calculamos el límite inferior de cada porción
+trabajo_tipo$ymin <- c(0, head(trabajo_tipo$ymax, n=-1))
+
+# Calculamos la posición de la etiqueta
+trabajo_tipo$posicion_etiqueta <- (trabajo_tipo$ymax + trabajo_tipo$ymin) / 2
+
+# Creamos las etiquetas de cada porción
+trabajo_tipo$etiqueta <- paste0(trabajo_tipo$Trabajo, # paste0 pega elementos
+                             "\n Cant: ", 
+                             trabajo_tipo$n)
+
+ggplot(trabajo_tipo, aes(ymax=ymax, 
+                         ymin=ymin, 
+                         xmax=4, 
+                         xmin=3, 
+                         fill=Trabajo)) +
+  geom_rect() +
+  coord_polar(theta = "y") +
+  xlim(c(2,4)) +
+  theme_void() +             # Elimina fondos y referencias
+  scale_fill_manual(values = c("#4E5667","#28877A")) +   # Define una escala de colores
+  theme(legend.position = "none",
+        plot.title.position = "plot",
+        text = element_text(family = "Roboto") 
+        ) + # Modifica posición leyendas y del título
+  labs(title = "Respuestas según Tipo de Trabajo",
+       fill = "Tipo de Trabajo", 
+       caption = fuente) +
+  geom_label(x = 3.5,
+             aes(y = posicion_etiqueta,
+                 label = etiqueta),
+             size = 3, 
+             color = "white",
+             family = "Ubuntu")
+```
+
+]
 
 ---
 # Comparación de sueldos de RRHH por países
@@ -184,35 +241,31 @@ Recibimos un total de `r nrow(kiwi)` respuestas `r emo::ji("party")`.
 
 ```{r sueldos_dolar, warning=FALSE, message=FALSE, echo=FALSE, dpi=300}
 
-# Países con más de 5 respuestas
-pais <- c("Argentina", "Bolivia", "Chile", "México", "Paraguay", "Perú", "Uruguay")
-tipo_cambio <- c(82.5, 6.96, 795.68, 21.38, 7027.43, 3.597, 48.892)
-
-tc <- tibble (pais, tipo_cambio) # Creo una tabla con los tipos de cambio de los países con más de 5 respuestas
 
 # Preparación de datos
 
-sueldos_dolar <- kiwi %>% 
+sueldos_dolar <- kiwi21 %>% 
   filter(Trabajo !="Freelance") %>% 
-  select(Género, `¿En qué puesto trabajás?`,`País en el que trabajas` ,
-         `¿Cuál es tu remuneración BRUTA MENSUAL en tu moneda local? (antes de impuestos y deducciones)`,
-         `Tipo de contratación`)
+  select(genero = `Identidad de Género`, 
+         puesto = `¿En qué puesto trabajás?`,
+         pais = `País en el que trabajas` ,
+         sueldo_bruto = `¿Cuál es tu remuneración BRUTA MENSUAL en tu moneda local? (antes de impuestos y deducciones)`,
+         tipo_contratacion = `Tipo de contratación`)
 
-names(sueldos_dolar) <- c("genero", "puesto","pais", "sueldo", "contrato")
 
 sueldos_dolar <- sueldos_dolar %>% 
   mutate(puesto = str_trim(puesto, side = "both")) %>% 
   filter(puesto != "Juzgado Civil y Comercial", puesto != "Pasante", 
          puesto != "Programador", puesto != "Jefe de Proyecto", 
-         contrato != "Pasante")
+         tipo_contratacion != "Pasante")
 
 
 # Agrego un multiplicador de sueldos para convertir los sueldos part time en full time
 sueldos_dolar <- sueldos_dolar %>% 
   left_join(tc, by="pais") %>% 
   mutate(multiplicador = if_else(contrato == "Part time", 1.5, 1),
-         sueldo = as.numeric(unlist(sueldo)),
-         sueldo_ft = sueldo * multiplicador,
+         sueldo = as.numeric(unlist(sueldo_bruto)),
+         sueldo_ft = sueldo_bruto * multiplicador,
          sueldo_dolar = sueldo_ft/tipo_cambio,
          cuenta = 1)
 
