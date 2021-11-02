@@ -17,7 +17,7 @@ background-image: url(archivos/kiwi-fondo.png)
 background-size: cover
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(fig.retina = 3, warning = FALSE, message = FALSE, echo = FALSE)
 ```
 
 
@@ -139,6 +139,7 @@ library(gt)
 library(extrafont)
 library(scales)
 library(ggalt)
+library(kableExtra)
 
 options(scipen = 999)
 
@@ -165,12 +166,15 @@ paises <- kiwi21 %>%
   mutate(cuenta = 1) %>% 
   group_by(pais) %>% 
   summarise(conteo = sum(cuenta)) %>% 
-  filter(conteo > 4) %>% 
+#  filter(conteo > 4) %>% 
   arrange(-conteo)
 
-gt(paises) %>% 
-  tab_header(title = "Cantidad de respuestas por país",
-             subtitle = "Países con más de 5 respuestas") 
+paises %>% 
+  rename(País = pais,
+         Cantidad = conteo) %>% 
+  kbl() %>% 
+  kable_paper("hover", full_width = F) %>% 
+  scroll_box(height = "450px")
 ```
 <br>
 Recibimos un total de `r nrow(kiwi21)` respuestas `r emo::ji("party")`.
@@ -182,6 +186,8 @@ Recibimos un total de `r nrow(kiwi21)` respuestas `r emo::ji("party")`.
 En esta encuesta participan tanto trabajadores en relación de dependencia, como trabajadores freelancers.
 
 La representación de ambos tipos de trabajadores es la siguiente:
+
+<img src="https://media.giphy.com/media/VFGjkyGvoivD7kjWBL/giphy.gif" />
 ]
 .pull-right[
 ```{r tipo_trabajo}
@@ -255,39 +261,35 @@ sueldos_dolar <- kiwi21 %>%
 
 sueldos_dolar <- sueldos_dolar %>% 
   mutate(puesto = str_trim(puesto, side = "both")) %>% 
-  filter(puesto != "Juzgado Civil y Comercial", puesto != "Pasante", 
-         puesto != "Programador", puesto != "Jefe de Proyecto", 
-         tipo_contratacion != "Pasante")
+  filter(!puesto %in% c("-", "Desarrollador", "Inspección de calidad", "Técnico"))
 
 
 # Agrego un multiplicador de sueldos para convertir los sueldos part time en full time
 sueldos_dolar <- sueldos_dolar %>% 
   left_join(tc, by="pais") %>% 
-  mutate(multiplicador = if_else(contrato == "Part time", 1.5, 1),
+  mutate(multiplicador = 1, #if_else(contrato == "Part time", 1.5, 1),
          sueldo = as.numeric(unlist(sueldo_bruto)),
-         sueldo_ft = sueldo_bruto * multiplicador,
+         sueldo_ft = sueldo * multiplicador,
          sueldo_dolar = sueldo_ft/tipo_cambio,
          cuenta = 1)
 
 # Estimamos percentiles 5 y 95 para usar valores más centrales
 # podamos todo lo que esté fuera de ese rango
 
-numericos <- funModeling::profiling_num(sueldos_dolar)
-poda_p05 <- numericos[5,6]
-poda_p95 <- numericos[5,10]
+numericos <- funModeling::profiling_num(sueldos_dolar$sueldo_dolar)
+poda_p05 <- numericos[1,6]
+poda_p95 <- numericos[1,10]
 
 mediana_pais <- sueldos_dolar %>% 
-  filter(pais %in% c("Argentina", "Bolivia", "Chile", "Paraguay", "Perú", "Uruguay"),
+  filter(pais %in% c("Argentina", "Perú", "Costa Rica", "Bolivia", "Uruguay",  "Chile", "México"),
          between(sueldo_dolar, poda_p05, poda_p95)) %>% 
   group_by(pais) %>% 
-  summarise(sueldop = list(mean_se(sueldo_dolar)),
-            cant = sum(cuenta)) %>% 
-  unnest(cols = c(sueldop)) %>% 
-  filter(cant>4)
+  summarise(sueldop = list(mean_se(sueldo_dolar))) %>% 
+  unnest(cols = c(sueldop))
 
 sueldo_dolar_pais <- sueldos_dolar %>% 
-  filter(pais %in% c("Argentina", "Bolivia", "Chile", "Paraguay", "Perú", "Uruguay"), 
-         between(sueldo_dolar, 400,3000))
+  filter(pais %in% c("Argentina", "Perú", "Costa Rica", "Bolivia", "Uruguay",  "Chile", "México"), 
+         between(sueldo_dolar, poda_p05 ,poda_p95))
   
 
 # Gráfico
@@ -297,11 +299,15 @@ ggplot(mediana_pais, aes(reorder(pais, -y), y =  y))+
   geom_errorbar(aes(ymin = ymin,ymax = ymax), position = "dodge", color = "#333e47")+
   geom_point(data = sueldo_dolar_pais, aes(x = pais, y = sueldo_dolar), 
              alpha = 0.3, size = 2, color = "#75838F")+
-  geom_text(aes(label = round(x=y, 0), vjust = 1.5, fontface = "bold"), size = 5, color = "white")+
+  geom_text(aes(label = comma(round(x=y, 0), big.mark = ".", 
+                              decimal.mark = ","),
+                vjust = 1.5, fontface = "bold"), 
+            size = 4, color = "white",
+            family = "Roboto")+
   scale_y_continuous(labels = comma_format(big.mark = ".", decimal.mark = ","))+
   labs(title = "Salario promedio por país",
        subtitle = "Sueldos de RRHH en U$S",
-       caption = "Fuente: Encuesta KIWI de Sueldos de RRHH para Latam \n Países con más de 5 respuestas",
+       caption = paste0(fuente,"\nPaíses con más de 5 respuestas"),
        x = "", y = "") + 
   estilo
 
@@ -312,7 +318,7 @@ ggplot(mediana_pais, aes(reorder(pais, -y), y =  y))+
 .pull-right[
 **Aclaraciones:** 
 1. Los resultados **no son representativos en absoluto** dada la baja cantidad de respuestas (cada punto representa una respuesta).
-2. Para la comparación de los sueldos en dólares estadounidenses tomamos el tipo de cambio de cada país al 19 de octubre de 2020 publicados por los respectivos bancos centrales.
+2. Para la comparación de los sueldos en dólares estadounidenses tomamos el tipo de cambio de cada país al 29 de octubre de 2021 publicados por los respectivos bancos centrales.
 3. Sólo mostramos resultados de los países con al menos 5 respuestas.
 4. Podamos los sueldos para mostrar aquellos que están dentro de los percentiles 5 y 95.
 ]
@@ -323,16 +329,18 @@ ggplot(mediana_pais, aes(reorder(pais, -y), y =  y))+
 
 .pull-left[
 ```{r respuestas-genero, echo=FALSE, warning=FALSE, dpi=300, out.width="90%"}
-diversidad <- kiwi %>% 
+diversidad <- kiwi21 %>% 
   filter(Trabajo !="Freelance") %>% 
-  mutate(genero = fct_collapse(Género, 
-                               "No binario"= c("Género diverso (género diverso / género fluido /otras minorías)", "No binario")))
+  mutate(genero = fct_collapse(`Identidad de Género`,
+                               "Mujer cis" = c("mujer", "Mujer", "Mujer heterosexual"),
+                               "Hombre cis" = c("Hombre", "Hombre hetero. Que es cis?", "Hombre heterosexual")))
 
 div <- diversidad %>% 
 select(genero) %>% 
   mutate(genero = factor(genero, 
-                         levels = c("Femenino", "Masculino", 
-                                    "No binario", "Prefiero no responder"))) %>% 
+                         levels = c("Mujer cis", "Hombre cis", 
+                                    "Prefiero no responder",
+                                    "No binario", "Gay"))) %>% 
   group_by(genero) %>% 
   summarise (n = n()) %>% 
   mutate(freq = n/sum(n)) %>% 
@@ -355,12 +363,12 @@ ggplot(div, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=genero)) +
   geom_rect() +
   coord_polar(theta="y") + 
   xlim(c(2, 4)) +
-  scale_fill_manual(values = c("#8624F5", "#1FC3AA", "#FFD129", "#75838F")) +
+  scale_fill_manual(values = c("#8624F5", "#1FC3AA", "#FFD129", "#75838F", "#7583FF")) +
   theme_void() +
   theme(legend.position = "right",
         panel.background = element_blank(),
         text = element_text(family = "Roboto")) +
-  labs(title = "Cantidad de respuestas según género",
+  labs(title = "Cantidad de respuestas según identidad de género",
        fill = "Género", 
        caption = fuente)
 ```
@@ -391,21 +399,17 @@ gt(div %>% select(genero, n, freq)) %>%
 
 ```{r genero-lider, echo=FALSE, message=FALSE, warning=FALSE, results="hide"}
 lideres <- diversidad %>% 
- select(genero = `Género`,
-         puesto = `¿En qué puesto trabajás?`,
-         equipo = `¿Cuántas personas tenés a cargo? (poné 0 si no tenés gente a cargo?`) %>% 
-  filter(puesto != "Juzgado Civil y Comercial", puesto != "Pasante", 
-         puesto != "Programador", puesto != "Jefe de Proyecto") %>% 
-  mutate(genero = fct_recode(genero,
-                             "No binario" = "Género diverso (género diverso / género fluido /otras minorías)"))
+ select(puesto = `¿En qué puesto trabajás?`,
+        genero = `Identidad de Género`,
+         equipo = "¿Cuántas personas tenés a cargo? (poné 0 si no tenés gente a cargo?)") %>% 
+  filter(!puesto %in% c("-", "Desarrollador", "Inspección de calidad", "Técnico"))
 
 
 # Propoción de líderes hombres y mujeres
 lideres_genero <- lideres %>% 
-  filter(genero %in% c("Masculino","Femenino")) %>% 
+  filter(genero %in% c("Hombre cis","Mujer cis")) %>% 
   group_by(genero) %>%
-  mutate(gente_a_cargo = if_else(puesto %in% c("Responsable", "Jefe", "Gerente", 
-                                               "Supervisor", "Director"),1,0)) %>%
+  mutate(gente_a_cargo = if_else(puesto %in% c("Responsable", "Jefe", "Gerente", "Supervisor", "Director", "coordinación", "Coordinadora", "Superintendente"),1,0)) %>%
   summarise(lider = sum(gente_a_cargo)) %>% 
   left_join(div) %>% 
   select(genero, lider, n) %>% 
@@ -438,8 +442,6 @@ valor_test <- if(resultados_test[1,3] > 0.05) {
   } else {
     print("la diferencia no es estadísticamente significativa, y la proporción de hombres no es estadísticamente mayor que el de las mujeres en puestos de liderazgo")
   }
-
-
 ```
 
 De acuerdo a las respuestas recolectadas **2 de cada 3** participantes son mujeres.
@@ -481,8 +483,8 @@ lideres_genero %>%
 
 .pull-left[
 ```{r brecha, echo=FALSE, dpi=300}
-liderazgo <- kiwi %>% 
-  select(Género, `¿En qué puesto trabajás?`,`País en el que trabajas` ,`¿Cuál es tu remuneración BRUTA MENSUAL en tu moneda local? (antes de impuestos y deducciones)`)
+liderazgo <- kiwi21 %>% 
+  select(`Identidad de Género`, `¿En qué puesto trabajás?`,`País en el que trabajas` ,`¿Cuál es tu remuneración BRUTA MENSUAL en tu moneda local? (antes de impuestos y deducciones)`)
 
 names(liderazgo) <- c("genero", "puesto","pais", "sueldo")
 
@@ -494,11 +496,9 @@ liderazgo <- liderazgo %>%
 
 
 brecha <- liderazgo %>% 
-  filter(genero %in% c("Femenino", "Masculino"), 
-         puesto %in% c("Director", "Gerente","Jefe", "HRBP","Responsable", "Analista", "Administrativo")) %>% 
-  mutate(puesto = factor(puesto, levels = c("Administrativo","Analista", 
-                                            "HRBP", "Responsable", "Jefe",
-                                            "Gerente","Director" ))) %>% 
+  filter(genero %in% c("Mujer cis", "Hombre cis"), 
+         puesto %in% c("Gerente","Jefe", "HRBP","Responsable", "Analista", "Administrativo")) %>% 
+  mutate(puesto = factor(puesto, levels = c("Administrativo","Analista",                                          "HRBP", "Responsable", "Jefe",                                            "Gerente","Director" ))) %>% 
   select(-pais) %>% 
   group_by(genero, puesto) %>% 
   summarise(media_salarial = mean(sueldo))
@@ -507,18 +507,19 @@ brecha <- liderazgo %>%
 
 brecha_graf <- brecha %>% 
   pivot_wider(., names_from = genero, values_from = media_salarial) %>% 
-  mutate(brecha = percent((Masculino-Femenino)/Masculino, 1),
-         x = (Masculino + Femenino)/2)
+  mutate(brecha = percent((`Hombre cis`-`Mujer cis`)/`Hombre cis`, 1),
+         x = (`Hombre cis` + `Mujer cis`)/2)
 
 ggplot(brecha_graf, 
-       aes(x = Femenino, xend = Masculino, y = puesto, 
+       aes(x = `Mujer cis`, xend = `Hombre cis`, y = puesto, 
            group = puesto, label = brecha)) +
   geom_dumbbell(color = "#808080",
                 size_x = 3, size_xend = 3,
                 colour_x = colores[1],
                 colour_xend = colores[2]) +
   geom_text(data = brecha_graf, 
-            aes(x, puesto, label = brecha), nudge_y = .2) +
+            aes(x, puesto, label = brecha), size =3,
+            nudge_y = .2) +
   labs(title = "Brecha salarial por puestos de RRHH",
        subtitle = "Sueldos promedios en Argentina",
        x = "",
@@ -533,7 +534,7 @@ ggplot(brecha_graf,
 ]
 
 .pull-right[
-En el único caso en que las mujeres tienen un sueldo promedio más alto que los hombres es en el puesto de *Director* de acuerdo a la muestra recolectada por nuestra encuesta.
+En los únicos casos en que las mujeres tienen un sueldo promedio más alto que los hombres son en los puestos de *Gerente* y de *Analista* de acuerdo a la muestra recolectada por nuestra encuesta.
 
 Agradecemos a [Natsumi Shokida](https://twitter.com/NatsuSh) por permitirnos replicar el gráfico de *"Brecha de ingresos mensuales por calificación del puesto de trabajo"* del informe ["La desigualdad de género se puede medir"](https://ecofeminita.github.io/EcoFemiData/informe_desigualdad_genero/trim_2019_03/informe.nb.html#) que realizan para Economía Femini(s)ta.
 
@@ -543,22 +544,54 @@ Agradecemos a [Natsumi Shokida](https://twitter.com/NatsuSh) por permitirnos rep
 # Preguntas Random
 ## "¿Pensás tener hijos?"/"¿Por qué no estás casada?"
 
-Cuando diseñamos esta encuesta, nos pareció una buena idea preguntar sobre cuáles fueron las preguntas más desubicadas o bizarras realizadas en una entrevista laboral. Pero nunca nos imaginamos que íbamos a necesitar filtrar por **chongo** (para saber a qué llamamos *"chongo"* en Argentina [entra en este link](https://www.serargentino.com/gente/como-hablamos/que-es-un-chongo)).
+.pull-left[
+Cuando diseñamos esta encuesta, nos pareció una buena idea preguntar sobre cuáles fueron las preguntas más desubicadas o bizarras realizadas en una entrevista laboral.
 
-```{r biz,echo=TRUE}
-preg <- kiwi[,c(2,41)] 
+En esta edición de la Encuesta nos sorprendió la diversidad de respuestas sobre temas relacionados a la familia. 
+
+```{r biz}
+preg <- kiwi21[,c(2,37)] 
 
 names(preg) <- c("genero", "pregunta")
 
+preg <- preg %>% 
+  mutate(genero = fct_collapse(genero, "Mujer cis" = "Mujer"))
+
 listado_preg <- preg %>% 
   filter(str_detect(pregunta, "hijo[s]")|
-           str_detect(pregunta, "casad[ao]|casar")| 
+           str_detect(pregunta, "familia")|
+           str_detect(pregunta, "divorcié")|
+           str_detect(pregunta, "embaraz[aoarte]")|
+           str_detect(pregunta, "madre")|
+           str_detect(pregunta, "pareja")|
+           str_detect(pregunta, "quién vivo")|
+           str_detect(pregunta, "matrimonio")|
+           str_detect(pregunta, "casad[aoe]|casar")| 
            str_detect(pregunta,"novio")|
-           str_detect(pregunta,"chongo")) #<<
+           str_detect(pregunta, "gay"))
 ```
 
-Esta es la pregunta original. Sin palabras:
-> **`r listado_preg[8,2]`** `r emo::ji("scream")`
+En el listado de preguntas impresentables la peor de todas fue:
+> **`r listado_preg[11,2]`** `r emo::ji("scream")`
+
+]
+
+.pull-right[
+```{r biz2,echo=TRUE, eval=FALSE}
+listado_preg <- preg %>% 
+  filter(str_detect(pregunta, "hijo[s]")|
+           str_detect(pregunta, "familia")|
+           str_detect(pregunta, "divorcié")|
+           str_detect(pregunta, "embaraz[aoarte]")|
+           str_detect(pregunta, "madre")|
+           str_detect(pregunta, "pareja")|
+           str_detect(pregunta, "quién vivo")|
+           str_detect(pregunta, "matrimonio")|
+           str_detect(pregunta, "casad[aoe]|casar")| 
+           str_detect(pregunta,"novio")|
+           str_detect(pregunta, "gay"))
+```
+]
 
 ---
 # Preguntas Random
@@ -568,9 +601,16 @@ Esta es la pregunta original. Sin palabras:
 ```{r bizar, echo = FALSE}
 gt(preg %>% 
   filter(str_detect(pregunta, "hijo[s]")|
-           str_detect(pregunta, "casad[ao]|casar")| 
+           str_detect(pregunta, "familia")|
+           str_detect(pregunta, "divorcié")|
+           str_detect(pregunta, "embaraz[aoarte]")|
+           str_detect(pregunta, "madre")|
+           str_detect(pregunta, "pareja")|
+           str_detect(pregunta, "quién vivo")|
+           str_detect(pregunta, "matrimonio")|
+           str_detect(pregunta, "casad[aoe]|casar")| 
            str_detect(pregunta,"novio")|
-           str_detect(pregunta,"chongo")) %>% 
+           str_detect(pregunta, "gay")) %>% 
   group_by(genero) %>% 
   summarise (n = n()) %>% 
   mutate(freq = percent(n/sum(n)))) %>% 
@@ -583,18 +623,26 @@ gt(preg %>%
 .pull-right[
 ```{r bizar-plot, echo=FALSE, out.width="85%", dpi=300}
 preg %>% 
-  filter(str_detect(pregunta, "hijo[s]")|
-           str_detect(pregunta, "casad[ao]|casar")| 
+  filter(genero != "No binario",
+         str_detect(pregunta, "hijo[s]")|
+           str_detect(pregunta, "familia")|
+           str_detect(pregunta, "divorcié")|
+           str_detect(pregunta, "embaraz[aoarte]")|
+           str_detect(pregunta, "madre")|
+           str_detect(pregunta, "pareja")|
+           str_detect(pregunta, "quién vivo")|
+           str_detect(pregunta, "matrimonio")|
+           str_detect(pregunta, "casad[aoe]|casar")| 
            str_detect(pregunta,"novio")|
-           str_detect(pregunta,"chongo")) %>% 
+           str_detect(pregunta, "gay")) %>% 
   group_by(genero) %>% 
   summarise (n = n()) %>% 
   mutate(freq = percent(n/sum(n))) %>% 
   ggplot(aes(x = genero, y = n, fill = genero)) +
   geom_col() +
-  scale_fill_manual(values = c("#8624F5", "#1FC3AA")) +
+  scale_fill_manual(values = c("#FFD129", "#1FC3AA", "#8624F5","#75838F")) +
   estilo + theme(legend.position = "none") +
-  labs(title = "Mujeres y hombres a los que les preguntaron si pensaban tener hijos \n o si planeaban casarse en una entrevista laboral",
+  labs(title = "Personas a las que les preguntaron si pensaban tener hijos\no si planeaban casarse en una entrevista laboral",
        x = "", y= "", fill = "",
        caption = fuente)
 ```
@@ -606,7 +654,7 @@ preg %>%
 
 .pull-left[
 ```{r nombre-area-plot, echo=FALSE, dpi=300}
-nombres <- kiwi[ , 32]
+nombres <- kiwi21[ , 31]
 
 nombres <- nombres %>% 
   rename(nombre = `¿Cómo se llama el área en tu empresa?`) %>% 
@@ -626,14 +674,15 @@ ggplot(nombres, aes(x = rtas, y = reorder(nombre,rtas))) +
   geom_col(fill = "#344D7E") +
   estilo +
   labs(title = "Top 10 de nombres para el área de RRHH", 
-       x = "", y = "", caption = fuente)
+       x = "", y = "", caption = fuente) +
+  theme(plot.title.position = "plot")
 ```
 
 ]
 
 .pull-right[
 
-En total, encontramos `r distintos` formas diferentes de llamar al área. Tristemente nos sorprende la cantidad de veces que encontramos que el área aún se llama *Oficina De Personal*.
+En total, encontramos `r distintos` formas diferentes de llamar al área. En comparación con la edición del año pasado, el nombre *Oficina De Personal* tiene menos protagonismo.
 
 
 ```{r nombre-area-tabla, echo=FALSE, out.width="70%"}
@@ -673,6 +722,8 @@ class: inverse, center, middle
 * [extrafont](https://CRAN.R-project.org/package=extrafont): Winston Chang, (2014). extrafont: Tools for using fonts. R package version 0.17.
 ---
 class: inverse, center, bottom
+
+Muchas gracias a [Ivana Feldfeber](https://www.linkedin.com/in/ivana-feldfeber/) del [Observatorio de Datos con Perspectiva de Género](https://sites.google.com/view/datagenero) por la paciencia y el asesoramiento en las definiciones sobre las preguntas de Identidad de Género y las relacionadas con diversidad.
 
 Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
 

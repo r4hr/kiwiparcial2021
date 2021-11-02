@@ -29,12 +29,14 @@
     <script src="index_files/shareon-1.4.1/shareon.min.js"></script>
     <link href="index_files/xaringanExtra-shareagain-0.2.6/shareagain.css" rel="stylesheet" />
     <script src="index_files/xaringanExtra-shareagain-0.2.6/shareagain.js"></script>
+    <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
 
 class: inverse, top, center
-background-image: url(kiwi-fondo.png)
+background-image: url(archivos/kiwi-fondo.png)
 background-size: cover
 
 
@@ -53,11 +55,11 @@ Image credit: [Designed by Freepik]("http://www.freepik.com")
 ---
 # Quiénes somos
 
-El [Club de R para RRHH](https://r4hr.club) es una comunidad de aprendizaje de programación en R destinada para las personas que trabajan en Recursos Humanos de habla hispana.
+[R4HR Club de R para RRHH](https://r4hr.club) es una comunidad de aprendizaje de programación en R destinada para las personas que trabajan o quieran trabajar en Recursos Humanos de habla hispana.
 
-Nuestro objetivo es acercar el mundo de ciencias de datos a nuestra profesión, adaptando el contenido a nuestros skills y conocimientos, y también siempre que podemos, usando datos relacionados con la gestión de personas, y en castellano, para hacer más accesible el aprendizaje.
+Nuestro objetivo es acercar el mundo de ciencias de datos a nuestra profesión, adaptando el contenido a nuestras habilidades y conocimientos, y también siempre que podemos, usando datos relacionados con la gestión de personas, y en castellano, para hacer más accesible el aprendizaje.
 
-Este es un proyecto que ideó [Sergio García Mora](https://www.linkedin.com/in/sergiogarciamora/), y que reúne a gente de Argentina, Perú, Chile, Paraguay, Uruguay, Panamá, USA, Francia, y cada vez más y más profesionales de distintas latitudes se unen y contribuyen al proyecto.
+Este es un proyecto que reúne a gente de Argentina, Perú, Chile, Paraguay, Uruguay, Panamá, USA, Francia, España, Ecuador, Colombia y cada vez a más y más profesionales de distintas latitudes se unen y contribuyen al proyecto.
 
 Para más información sobre el Club de R leé [este post](https://r4hr.club/2020/09/23/el-club-de-r-para-rrhh/), o escribinos a [info@r4hr.club](mailto:info@r4hr.club).
 
@@ -67,7 +69,7 @@ Para más información sobre el Club de R leé [este post](https://r4hr.club/202
 
 Uno de los problemas en el aprendizaje de People Analytics es la falta de datasets para practicar, así que una decisión que tomamos fue el de generar nuestro propio dataset y de abrirlo para toda la comunidad.
 
-Para hacer esta encuesta nos "inspiramos" en [SysArmy](https://sysarmy.com/blog/), una comunidad para las personas que trabajan en tecnología que además de organizar uno de los eventos más importantes de tecnología de Argentina, Nerdearla, y que también organizan una encuesta salarial dos veces por año.
+Para hacer esta encuesta nos "inspiramos" en [SysArmy](https://sysarmy.com/blog/), una comunidad para las personas que trabajan en tecnología que además de organizar uno de los eventos más importantes de tecnología de Argentina, Nerdearla, también organizan una encuesta salarial dos veces por año.
 
 Estas son las motivaciones detrás de esta encuesta. Tener nuestro propio dataset, compartir los resultados y los datos, para que todos los entusiastas de RRHH y de los datos cuenten con una fuente de datos para practicar.
 
@@ -78,17 +80,11 @@ background-color: "#5d6d7e"
 # Quiénes somos
 ## Organizadores
 .pull-left[
-🕵 [Adrián Quiroga](https://www.linkedin.com/in/adrian-quiroga-ab57424b/) 
-
 👩‍💻 [Alithu Castro](https://www.linkedin.com/in/alithucastro/)
-
-👩‍🎓 [Andrea Herpsomer](https://www.linkedin.com/in/andreaherpsomer/)
 
 👩‍🎨 [Carla Cirone](https://www.linkedin.com/in/carla-cirone-0566b095/)
 
 👩‍💻 [Daniela García](https://www.linkedin.com/in/claudia-daniela-garcia-138b1a14b/)
-
-👩‍🚀 [Lucía Huilén Gómez](https://www.linkedin.com/in/luc%C3%ADa-huil%C3%A9n-g%C3%B3mez-93565276/)
 
 👨‍🎤 [Santiago Lardone Quinodoz](https://www.linkedin.com/in/santiago-lardone-quinodoz-978588167/)
 
@@ -99,7 +95,7 @@ background-color: "#5d6d7e"
 👩‍🏫 [Yanel Paulette](https://www.linkedin.com/in/yanelpaulette/)
 ]
 
-.pull-right[&lt;img src="kiwi-happy.jpg"  /&gt;]
+.pull-right[&lt;img src="archivos/kiwi-happy.jpg"  /&gt;]
 ---
 background-color: "#5d6d7e" 
 # ¿Aún no completaste la encuesta?
@@ -111,10 +107,10 @@ background-color: "#5d6d7e"
 
 .pull-right[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-### Completá la encuesta en [este link](https://bit.ly/sueldos-rh)
+### Completá la encuesta en [este link](https://bit.ly/kiwi2021)
 
 &lt;br&gt;
-### El tiempo aproximado para completarla es de 6'52" #chequeadísimo 👩‍🔬
+### El tiempo aproximado para completarla es de 7'26" #chequeadísimo 👩‍🔬
 
 ]
 
@@ -124,388 +120,96 @@ class: inverse, center, middle
 
 &lt;img src="https://media.giphy.com/media/xThtalkAxYnZd94uB2/giphy.gif" /&gt;
 
-El 12 de noviembre publicamos los resultados finales.
+El 30 de noviembre publicamos los resultados finales.
 
 ---
 # Participación
 ## Respuestas por países
 
 
-<div id="kvkkfhoosy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#kvkkfhoosy .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#kvkkfhoosy .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#kvkkfhoosy .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#kvkkfhoosy .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#kvkkfhoosy .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#kvkkfhoosy .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#kvkkfhoosy .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#kvkkfhoosy .gt_group_heading {
-  padding: 8px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#kvkkfhoosy .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#kvkkfhoosy .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#kvkkfhoosy .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#kvkkfhoosy .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#kvkkfhoosy .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#kvkkfhoosy .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kvkkfhoosy .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#kvkkfhoosy .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#kvkkfhoosy .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#kvkkfhoosy .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#kvkkfhoosy .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#kvkkfhoosy .gt_left {
-  text-align: left;
-}
-
-#kvkkfhoosy .gt_center {
-  text-align: center;
-}
-
-#kvkkfhoosy .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#kvkkfhoosy .gt_font_normal {
-  font-weight: normal;
-}
-
-#kvkkfhoosy .gt_font_bold {
-  font-weight: bold;
-}
-
-#kvkkfhoosy .gt_font_italic {
-  font-style: italic;
-}
-
-#kvkkfhoosy .gt_super {
-  font-size: 65%;
-}
-
-#kvkkfhoosy .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
-}
-</style>
-<table class="gt_table">
-  <thead class="gt_header">
-    <tr>
-      <th colspan="2" class="gt_heading gt_title gt_font_normal" style>Cantidad de respuestas por país</th>
-    </tr>
-    <tr>
-      <th colspan="2" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Países con más de 5 respuestas</th>
-    </tr>
-  </thead>
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">País en el que trabajas</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Cuenta</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Argentina</td>
-<td class="gt_row gt_right">683</td></tr>
-    <tr><td class="gt_row gt_left">Bolivia</td>
-<td class="gt_row gt_right">15</td></tr>
-    <tr><td class="gt_row gt_left">Chile</td>
-<td class="gt_row gt_right">13</td></tr>
-    <tr><td class="gt_row gt_left">Paraguay</td>
-<td class="gt_row gt_right">12</td></tr>
-    <tr><td class="gt_row gt_left">México</td>
-<td class="gt_row gt_right">9</td></tr>
-    <tr><td class="gt_row gt_left">Uruguay</td>
-<td class="gt_row gt_right">9</td></tr>
-    <tr><td class="gt_row gt_left">Perú</td>
-<td class="gt_row gt_right">8</td></tr>
-  </tbody>
-  
-  
-</table>
-</div>
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:450px; "&gt;&lt;table class=" lightable-paper lightable-hover" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; País &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; Cantidad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Argentina &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 322 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Perú &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Costa Rica &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Bolivia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Uruguay &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Chile &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; México &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Colombia &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Ecuador &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Estados Unidos &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Guatemala &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Paraguay &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; El Salvador &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Venezuela &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
 &lt;br&gt;
-Recibimos un total de 762 respuestas 🎈.
+Recibimos un total de 400 respuestas 🎉.
+
+---
+# Participantes
+
+.pull-left[
+En esta encuesta participan tanto trabajadores en relación de dependencia, como trabajadores freelancers.
+
+La representación de ambos tipos de trabajadores es la siguiente:
+
+&lt;img src="https://media.giphy.com/media/VFGjkyGvoivD7kjWBL/giphy.gif" /&gt;
+]
+.pull-right[
+&lt;img src="index_files/figure-html/tipo_trabajo-1.png" width="504" /&gt;
+
+]
 
 ---
 # Comparación de sueldos de RRHH por países
@@ -519,7 +223,7 @@ Recibimos un total de 762 respuestas 🎈.
 .pull-right[
 **Aclaraciones:** 
 1. Los resultados **no son representativos en absoluto** dada la baja cantidad de respuestas (cada punto representa una respuesta).
-2. Para la comparación de los sueldos en dólares estadounidenses tomamos el tipo de cambio de cada país al 19 de octubre de 2020 publicados por los respectivos bancos centrales.
+2. Para la comparación de los sueldos en dólares estadounidenses tomamos el tipo de cambio de cada país al 29 de octubre de 2021 publicados por los respectivos bancos centrales.
 3. Sólo mostramos resultados de los países con al menos 5 respuestas.
 4. Podamos los sueldos para mostrar aquellos que están dentro de los percentiles 5 y 95.
 ]
@@ -534,12 +238,12 @@ Recibimos un total de 762 respuestas 🎈.
 ]
 
 .pull-right[
-<div id="oxdblfvuko" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rrjubbngqn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#oxdblfvuko .gt_table {
+#rrjubbngqn .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -564,7 +268,7 @@ Recibimos un total de 762 respuestas 🎈.
   border-left-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_heading {
+#rrjubbngqn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -576,7 +280,7 @@ Recibimos un total de 762 respuestas 🎈.
   border-right-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_title {
+#rrjubbngqn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -586,7 +290,7 @@ Recibimos un total de 762 respuestas 🎈.
   border-bottom-width: 0;
 }
 
-#oxdblfvuko .gt_subtitle {
+#rrjubbngqn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -596,13 +300,13 @@ Recibimos un total de 762 respuestas 🎈.
   border-top-width: 0;
 }
 
-#oxdblfvuko .gt_bottom_border {
+#rrjubbngqn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_col_headings {
+#rrjubbngqn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -617,7 +321,7 @@ Recibimos un total de 762 respuestas 🎈.
   border-right-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_col_heading {
+#rrjubbngqn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -637,7 +341,7 @@ Recibimos un total de 762 respuestas 🎈.
   overflow-x: hidden;
 }
 
-#oxdblfvuko .gt_column_spanner_outer {
+#rrjubbngqn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -649,15 +353,15 @@ Recibimos un total de 762 respuestas 🎈.
   padding-right: 4px;
 }
 
-#oxdblfvuko .gt_column_spanner_outer:first-child {
+#rrjubbngqn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oxdblfvuko .gt_column_spanner_outer:last-child {
+#rrjubbngqn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oxdblfvuko .gt_column_spanner {
+#rrjubbngqn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -669,7 +373,7 @@ Recibimos un total de 762 respuestas 🎈.
   width: 100%;
 }
 
-#oxdblfvuko .gt_group_heading {
+#rrjubbngqn .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -691,7 +395,7 @@ Recibimos un total de 762 respuestas 🎈.
   vertical-align: middle;
 }
 
-#oxdblfvuko .gt_empty_group_heading {
+#rrjubbngqn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -706,15 +410,15 @@ Recibimos un total de 762 respuestas 🎈.
   vertical-align: middle;
 }
 
-#oxdblfvuko .gt_from_md > :first-child {
+#rrjubbngqn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oxdblfvuko .gt_from_md > :last-child {
+#rrjubbngqn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oxdblfvuko .gt_row {
+#rrjubbngqn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -733,7 +437,7 @@ Recibimos un total de 762 respuestas 🎈.
   overflow-x: hidden;
 }
 
-#oxdblfvuko .gt_stub {
+#rrjubbngqn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -745,7 +449,7 @@ Recibimos un total de 762 respuestas 🎈.
   padding-left: 12px;
 }
 
-#oxdblfvuko .gt_summary_row {
+#rrjubbngqn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -755,7 +459,7 @@ Recibimos un total de 762 respuestas 🎈.
   padding-right: 5px;
 }
 
-#oxdblfvuko .gt_first_summary_row {
+#rrjubbngqn .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -765,7 +469,7 @@ Recibimos un total de 762 respuestas 🎈.
   border-top-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_grand_summary_row {
+#rrjubbngqn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -775,7 +479,7 @@ Recibimos un total de 762 respuestas 🎈.
   padding-right: 5px;
 }
 
-#oxdblfvuko .gt_first_grand_summary_row {
+#rrjubbngqn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -785,11 +489,11 @@ Recibimos un total de 762 respuestas 🎈.
   border-top-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_striped {
+#rrjubbngqn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oxdblfvuko .gt_table_body {
+#rrjubbngqn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -798,7 +502,7 @@ Recibimos un total de 762 respuestas 🎈.
   border-bottom-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_footnotes {
+#rrjubbngqn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -812,13 +516,13 @@ Recibimos un total de 762 respuestas 🎈.
   border-right-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_footnote {
+#rrjubbngqn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#oxdblfvuko .gt_sourcenotes {
+#rrjubbngqn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -832,41 +536,41 @@ Recibimos un total de 762 respuestas 🎈.
   border-right-color: #D3D3D3;
 }
 
-#oxdblfvuko .gt_sourcenote {
+#rrjubbngqn .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#oxdblfvuko .gt_left {
+#rrjubbngqn .gt_left {
   text-align: left;
 }
 
-#oxdblfvuko .gt_center {
+#rrjubbngqn .gt_center {
   text-align: center;
 }
 
-#oxdblfvuko .gt_right {
+#rrjubbngqn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oxdblfvuko .gt_font_normal {
+#rrjubbngqn .gt_font_normal {
   font-weight: normal;
 }
 
-#oxdblfvuko .gt_font_bold {
+#rrjubbngqn .gt_font_bold {
   font-weight: bold;
 }
 
-#oxdblfvuko .gt_font_italic {
+#rrjubbngqn .gt_font_italic {
   font-style: italic;
 }
 
-#oxdblfvuko .gt_super {
+#rrjubbngqn .gt_super {
   font-size: 65%;
 }
 
-#oxdblfvuko .gt_footnote_marks {
+#rrjubbngqn .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -887,18 +591,18 @@ Recibimos un total de 762 respuestas 🎈.
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_center">Femenino</td>
-<td class="gt_row gt_center">453</td>
-<td class="gt_row gt_center">67.2&percnt;</td></tr>
-    <tr><td class="gt_row gt_center">Masculino</td>
-<td class="gt_row gt_center">218</td>
-<td class="gt_row gt_center">32.3&percnt;</td></tr>
-    <tr><td class="gt_row gt_center">No binario</td>
-<td class="gt_row gt_center">2</td>
-<td class="gt_row gt_center">0.3&percnt;</td></tr>
+    <tr><td class="gt_row gt_center">Mujer cis</td>
+<td class="gt_row gt_center">254</td>
+<td class="gt_row gt_center">69.2&percnt;</td></tr>
+    <tr><td class="gt_row gt_center">Hombre cis</td>
+<td class="gt_row gt_center">108</td>
+<td class="gt_row gt_center">29.4&percnt;</td></tr>
     <tr><td class="gt_row gt_center">Prefiero no responder</td>
+<td class="gt_row gt_center">4</td>
+<td class="gt_row gt_center">1.1&percnt;</td></tr>
+    <tr><td class="gt_row gt_center">Gay</td>
 <td class="gt_row gt_center">1</td>
-<td class="gt_row gt_center">0.1&percnt;</td></tr>
+<td class="gt_row gt_center">0.3&percnt;</td></tr>
   </tbody>
   <tfoot class="gt_sourcenotes">
     <tr>
@@ -923,11 +627,11 @@ De acuerdo a las respuestas recolectadas **2 de cada 3** participantes son mujer
 
 Para los puestos de liderazgo consideramos las personas en los puestos de *Director, Gerente, Jefe, Responsable,* y *Supervisor*.
 
-Del total de **mujeres**, 453 respuestas, 194 ocupan un puesto de liderazgo (42.8%).
+Del total de **mujeres**, 108 respuestas, 54 ocupan un puesto de liderazgo (50%).
 
-Del total de **hombres**, 218 respuestas, 108 ocupan un puesto de liderazgo (49.5%).
+Del total de **hombres**, 254 respuestas, 77 ocupan un puesto de liderazgo (30%).
 
-Con un *p-value* igual a 0.736 podemos afirmar que **la diferencia es estadísticamente significativa, y la proporción de hombres en puestos de liderazgo es mayor que el de las mujeres**.
+Con un *p-value* igual a 0.804 podemos afirmar que **la diferencia es estadísticamente significativa, y la proporción de hombres en puestos de liderazgo es mayor que el de las mujeres**.
 ]
 
 .pull-right[
@@ -943,7 +647,7 @@ Con un *p-value* igual a 0.736 podemos afirmar que **la diferencia es estadísti
 ]
 
 .pull-right[
-En el único caso en que las mujeres tienen un sueldo promedio más alto que los hombres es en el puesto de *Director* de acuerdo a la muestra recolectada por nuestra encuesta.
+En los únicos casos en que las mujeres tienen un sueldo promedio más alto que los hombres son en los puestos de *Gerente* y de *Analista* de acuerdo a la muestra recolectada por nuestra encuesta.
 
 Agradecemos a [Natsumi Shokida](https://twitter.com/NatsuSh) por permitirnos replicar el gráfico de *"Brecha de ingresos mensuales por calificación del puesto de trabajo"* del informe ["La desigualdad de género se puede medir"](https://ecofeminita.github.io/EcoFemiData/informe_desigualdad_genero/trim_2019_03/informe.nb.html#) que realizan para Economía Femini(s)ta.
 
@@ -953,35 +657,47 @@ Agradecemos a [Natsumi Shokida](https://twitter.com/NatsuSh) por permitirnos rep
 # Preguntas Random
 ## "¿Pensás tener hijos?"/"¿Por qué no estás casada?"
 
-Cuando diseñamos esta encuesta, nos pareció una buena idea preguntar sobre cuáles fueron las preguntas más desubicadas o bizarras realizadas en una entrevista laboral. Pero nunca nos imaginamos que íbamos a necesitar filtrar por **chongo** (para saber a qué llamamos *"chongo"* en Argentina [entra en este link](https://www.serargentino.com/gente/como-hablamos/que-es-un-chongo)).
+.pull-left[
+Cuando diseñamos esta encuesta, nos pareció una buena idea preguntar sobre cuáles fueron las preguntas más desubicadas o bizarras realizadas en una entrevista laboral.
 
+En esta edición de la Encuesta nos sorprendió la diversidad de respuestas sobre temas relacionados a la familia. 
+
+
+
+En el listado de preguntas impresentables la peor de todas fue:
+&gt; **Tenes pensado embarazarte en el próximo año?** 😱
+
+]
+
+.pull-right[
 
 ```r
-preg &lt;- kiwi[,c(2,41)] 
-
-names(preg) &lt;- c("genero", "pregunta")
-
 listado_preg &lt;- preg %&gt;% 
   filter(str_detect(pregunta, "hijo[s]")|
-           str_detect(pregunta, "casad[ao]|casar")| 
+           str_detect(pregunta, "familia")|
+           str_detect(pregunta, "divorcié")|
+           str_detect(pregunta, "embaraz[aoarte]")|
+           str_detect(pregunta, "madre")|
+           str_detect(pregunta, "pareja")|
+           str_detect(pregunta, "quién vivo")|
+           str_detect(pregunta, "matrimonio")|
+           str_detect(pregunta, "casad[aoe]|casar")| 
            str_detect(pregunta,"novio")|
-*          str_detect(pregunta,"chongo"))
+           str_detect(pregunta, "gay"))
 ```
-
-Esta es la pregunta original. Sin palabras:
-&gt; **Si tenia novio, pareja, "chongo o filito"** 😱
+]
 
 ---
 # Preguntas Random
 ## "¿Pensás tener hijos?"/"¿Por qué no estás casada?"
 
-.pull-left[Al respecto quisimos saber a cuántas mujeres y hombres les habían hecho preguntas desubicadas sobre si tendrían hijos, o si tenían planes de casamiento. En 42 respuestas esto es lo que encontramos:
-<div id="ewbzapoblh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+.pull-left[Al respecto quisimos saber a cuántas mujeres y hombres les habían hecho preguntas desubicadas sobre si tendrían hijos, o si tenían planes de casamiento. En 45 respuestas esto es lo que encontramos:
+<div id="zemficirov" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ewbzapoblh .gt_table {
+#zemficirov .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1006,7 +722,7 @@ Esta es la pregunta original. Sin palabras:
   border-left-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_heading {
+#zemficirov .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1018,7 +734,7 @@ Esta es la pregunta original. Sin palabras:
   border-right-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_title {
+#zemficirov .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1028,7 +744,7 @@ Esta es la pregunta original. Sin palabras:
   border-bottom-width: 0;
 }
 
-#ewbzapoblh .gt_subtitle {
+#zemficirov .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1038,13 +754,13 @@ Esta es la pregunta original. Sin palabras:
   border-top-width: 0;
 }
 
-#ewbzapoblh .gt_bottom_border {
+#zemficirov .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_col_headings {
+#zemficirov .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1059,7 +775,7 @@ Esta es la pregunta original. Sin palabras:
   border-right-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_col_heading {
+#zemficirov .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1079,7 +795,7 @@ Esta es la pregunta original. Sin palabras:
   overflow-x: hidden;
 }
 
-#ewbzapoblh .gt_column_spanner_outer {
+#zemficirov .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1091,15 +807,15 @@ Esta es la pregunta original. Sin palabras:
   padding-right: 4px;
 }
 
-#ewbzapoblh .gt_column_spanner_outer:first-child {
+#zemficirov .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ewbzapoblh .gt_column_spanner_outer:last-child {
+#zemficirov .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ewbzapoblh .gt_column_spanner {
+#zemficirov .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1111,7 +827,7 @@ Esta es la pregunta original. Sin palabras:
   width: 100%;
 }
 
-#ewbzapoblh .gt_group_heading {
+#zemficirov .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1133,7 +849,7 @@ Esta es la pregunta original. Sin palabras:
   vertical-align: middle;
 }
 
-#ewbzapoblh .gt_empty_group_heading {
+#zemficirov .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1148,15 +864,15 @@ Esta es la pregunta original. Sin palabras:
   vertical-align: middle;
 }
 
-#ewbzapoblh .gt_from_md > :first-child {
+#zemficirov .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ewbzapoblh .gt_from_md > :last-child {
+#zemficirov .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ewbzapoblh .gt_row {
+#zemficirov .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1175,7 +891,7 @@ Esta es la pregunta original. Sin palabras:
   overflow-x: hidden;
 }
 
-#ewbzapoblh .gt_stub {
+#zemficirov .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1187,7 +903,7 @@ Esta es la pregunta original. Sin palabras:
   padding-left: 12px;
 }
 
-#ewbzapoblh .gt_summary_row {
+#zemficirov .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1197,7 +913,7 @@ Esta es la pregunta original. Sin palabras:
   padding-right: 5px;
 }
 
-#ewbzapoblh .gt_first_summary_row {
+#zemficirov .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1207,7 +923,7 @@ Esta es la pregunta original. Sin palabras:
   border-top-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_grand_summary_row {
+#zemficirov .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1217,7 +933,7 @@ Esta es la pregunta original. Sin palabras:
   padding-right: 5px;
 }
 
-#ewbzapoblh .gt_first_grand_summary_row {
+#zemficirov .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1227,11 +943,11 @@ Esta es la pregunta original. Sin palabras:
   border-top-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_striped {
+#zemficirov .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ewbzapoblh .gt_table_body {
+#zemficirov .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1240,7 +956,7 @@ Esta es la pregunta original. Sin palabras:
   border-bottom-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_footnotes {
+#zemficirov .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1254,13 +970,13 @@ Esta es la pregunta original. Sin palabras:
   border-right-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_footnote {
+#zemficirov .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#ewbzapoblh .gt_sourcenotes {
+#zemficirov .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1274,41 +990,41 @@ Esta es la pregunta original. Sin palabras:
   border-right-color: #D3D3D3;
 }
 
-#ewbzapoblh .gt_sourcenote {
+#zemficirov .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#ewbzapoblh .gt_left {
+#zemficirov .gt_left {
   text-align: left;
 }
 
-#ewbzapoblh .gt_center {
+#zemficirov .gt_center {
   text-align: center;
 }
 
-#ewbzapoblh .gt_right {
+#zemficirov .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ewbzapoblh .gt_font_normal {
+#zemficirov .gt_font_normal {
   font-weight: normal;
 }
 
-#ewbzapoblh .gt_font_bold {
+#zemficirov .gt_font_bold {
   font-weight: bold;
 }
 
-#ewbzapoblh .gt_font_italic {
+#zemficirov .gt_font_italic {
   font-style: italic;
 }
 
-#ewbzapoblh .gt_super {
+#zemficirov .gt_super {
   font-size: 65%;
 }
 
-#ewbzapoblh .gt_footnote_marks {
+#zemficirov .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1318,18 +1034,21 @@ Esta es la pregunta original. Sin palabras:
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Género</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Género</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">Cantidad</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Porcentaje</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">Femenino</td>
-<td class="gt_row gt_right">33</td>
-<td class="gt_row gt_left">79%</td></tr>
-    <tr><td class="gt_row gt_left">Masculino</td>
-<td class="gt_row gt_right">9</td>
-<td class="gt_row gt_left">21%</td></tr>
+    <tr><td class="gt_row gt_center">Gay</td>
+<td class="gt_row gt_right">1</td>
+<td class="gt_row gt_left">2%</td></tr>
+    <tr><td class="gt_row gt_center">Hombre cis</td>
+<td class="gt_row gt_right">6</td>
+<td class="gt_row gt_left">13%</td></tr>
+    <tr><td class="gt_row gt_center">Mujer cis</td>
+<td class="gt_row gt_right">38</td>
+<td class="gt_row gt_left">84%</td></tr>
   </tbody>
   
   
@@ -1352,15 +1071,15 @@ Esta es la pregunta original. Sin palabras:
 
 .pull-right[
 
-En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos sorprende la cantidad de veces que encontramos que el área aún se llama *Oficina De Personal*.
+En total, encontramos 43 formas diferentes de llamar al área. En comparación con la edición del año pasado, el nombre *Oficina De Personal* tiene menos protagonismo.
 
 
-<div id="kzbupopdhf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ydjorzuata" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kzbupopdhf .gt_table {
+#ydjorzuata .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1385,7 +1104,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-left-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_heading {
+#ydjorzuata .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1397,7 +1116,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-right-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_title {
+#ydjorzuata .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1407,7 +1126,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-bottom-width: 0;
 }
 
-#kzbupopdhf .gt_subtitle {
+#ydjorzuata .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1417,13 +1136,13 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-top-width: 0;
 }
 
-#kzbupopdhf .gt_bottom_border {
+#ydjorzuata .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_col_headings {
+#ydjorzuata .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1438,7 +1157,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-right-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_col_heading {
+#ydjorzuata .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1458,7 +1177,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   overflow-x: hidden;
 }
 
-#kzbupopdhf .gt_column_spanner_outer {
+#ydjorzuata .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1470,15 +1189,15 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   padding-right: 4px;
 }
 
-#kzbupopdhf .gt_column_spanner_outer:first-child {
+#ydjorzuata .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kzbupopdhf .gt_column_spanner_outer:last-child {
+#ydjorzuata .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kzbupopdhf .gt_column_spanner {
+#ydjorzuata .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1490,7 +1209,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   width: 100%;
 }
 
-#kzbupopdhf .gt_group_heading {
+#ydjorzuata .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1512,7 +1231,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   vertical-align: middle;
 }
 
-#kzbupopdhf .gt_empty_group_heading {
+#ydjorzuata .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1527,15 +1246,15 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   vertical-align: middle;
 }
 
-#kzbupopdhf .gt_from_md > :first-child {
+#ydjorzuata .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kzbupopdhf .gt_from_md > :last-child {
+#ydjorzuata .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kzbupopdhf .gt_row {
+#ydjorzuata .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1554,7 +1273,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   overflow-x: hidden;
 }
 
-#kzbupopdhf .gt_stub {
+#ydjorzuata .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1566,7 +1285,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   padding-left: 12px;
 }
 
-#kzbupopdhf .gt_summary_row {
+#ydjorzuata .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1576,7 +1295,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   padding-right: 5px;
 }
 
-#kzbupopdhf .gt_first_summary_row {
+#ydjorzuata .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1586,7 +1305,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-top-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_grand_summary_row {
+#ydjorzuata .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1596,7 +1315,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   padding-right: 5px;
 }
 
-#kzbupopdhf .gt_first_grand_summary_row {
+#ydjorzuata .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1606,11 +1325,11 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-top-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_striped {
+#ydjorzuata .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kzbupopdhf .gt_table_body {
+#ydjorzuata .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1619,7 +1338,7 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-bottom-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_footnotes {
+#ydjorzuata .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1633,13 +1352,13 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-right-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_footnote {
+#ydjorzuata .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#kzbupopdhf .gt_sourcenotes {
+#ydjorzuata .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1653,41 +1372,41 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   border-right-color: #D3D3D3;
 }
 
-#kzbupopdhf .gt_sourcenote {
+#ydjorzuata .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#kzbupopdhf .gt_left {
+#ydjorzuata .gt_left {
   text-align: left;
 }
 
-#kzbupopdhf .gt_center {
+#ydjorzuata .gt_center {
   text-align: center;
 }
 
-#kzbupopdhf .gt_right {
+#ydjorzuata .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kzbupopdhf .gt_font_normal {
+#ydjorzuata .gt_font_normal {
   font-weight: normal;
 }
 
-#kzbupopdhf .gt_font_bold {
+#ydjorzuata .gt_font_bold {
   font-weight: bold;
 }
 
-#kzbupopdhf .gt_font_italic {
+#ydjorzuata .gt_font_italic {
   font-style: italic;
 }
 
-#kzbupopdhf .gt_super {
+#ydjorzuata .gt_super {
   font-size: 65%;
 }
 
-#kzbupopdhf .gt_footnote_marks {
+#ydjorzuata .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1703,24 +1422,24 @@ En total, encontramos 58 formas diferentes de llamar al área. Tristemente nos s
   </thead>
   <tbody class="gt_table_body">
     <tr><td class="gt_row gt_left">Recursos Humanos</td>
-<td class="gt_row gt_right">403</td></tr>
+<td class="gt_row gt_right">193</td></tr>
     <tr><td class="gt_row gt_left">Capital Humano</td>
-<td class="gt_row gt_right">40</td></tr>
-    <tr><td class="gt_row gt_left" style="#F8FF00">Oficina De Personal</td>
-<td class="gt_row gt_right">28</td></tr>
-    <tr><td class="gt_row gt_left">Gestión De Personas</td>
-<td class="gt_row gt_right">15</td></tr>
+<td class="gt_row gt_right">31</td></tr>
     <tr><td class="gt_row gt_left">Talento Humano</td>
-<td class="gt_row gt_right">10</td></tr>
+<td class="gt_row gt_right">20</td></tr>
     <tr><td class="gt_row gt_left">People</td>
-<td class="gt_row gt_right">8</td></tr>
-    <tr><td class="gt_row gt_left">Desarrollo Humano</td>
+<td class="gt_row gt_right">11</td></tr>
+    <tr><td class="gt_row gt_left">Gestión De Personas</td>
+<td class="gt_row gt_right">7</td></tr>
+    <tr><td class="gt_row gt_left" style="#F8FF00">Oficina De Personal</td>
 <td class="gt_row gt_right">5</td></tr>
-    <tr><td class="gt_row gt_left">Employee Experience</td>
+    <tr><td class="gt_row gt_left">Desarrollo Humano</td>
+<td class="gt_row gt_right">4</td></tr>
+    <tr><td class="gt_row gt_left">People &amp; Culture</td>
 <td class="gt_row gt_right">3</td></tr>
-    <tr><td class="gt_row gt_left">Administración</td>
+    <tr><td class="gt_row gt_left">Gestión Humana</td>
 <td class="gt_row gt_right">2</td></tr>
-    <tr><td class="gt_row gt_left">Desarrollo De Personas</td>
+    <tr><td class="gt_row gt_left">Personas Y Cultura</td>
 <td class="gt_row gt_right">2</td></tr>
   </tbody>
   
@@ -1753,6 +1472,8 @@ class: inverse, center, middle
 * [extrafont](https://CRAN.R-project.org/package=extrafont): Winston Chang, (2014). extrafont: Tools for using fonts. R package version 0.17.
 ---
 class: inverse, center, bottom
+
+Muchas gracias a [Ivana Feldfeber](https://www.linkedin.com/in/ivana-feldfeber/) del [Observatorio de Datos con Perspectiva de Género](https://sites.google.com/view/datagenero) por la paciencia y el asesoramiento en las definiciones sobre las preguntas de Identidad de Género y las relacionadas con diversidad.
 
 Presentación realizada con el paquete [Xaringan](https://github.com/yihui/xaringan) desarrollado por Yihui Xie.
 
