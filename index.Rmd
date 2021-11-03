@@ -426,10 +426,10 @@ test_lider <- lideres_genero %>%
                names_to = "es_lider", values_to = "conteo")
 
 # Del total de respuestas me interesa sólo ver cuáles son los hombres con puesto de liderazgo
-test_lider$cat <- c(0,0,1,0)
+test_lider$cat <- c(1,0,0,0)
 
 # Extraigo el mu para decidir si la diferencia es significativa y pasarlo a la fórmula del test.
-prop_mujer_lid <- pull(lideres_genero[1,2]/lideres_genero[1,3])
+prop_mujer_lid <- pull(lideres_genero[2,2]/lideres_genero[2,3])
 
 # Realizo el test de hipótesis.
 # H0 = Las proporciones de líderes hombres y mujeres son iguales
@@ -446,11 +446,11 @@ valor_test <- if(resultados_test[1,3] > 0.05) {
 
 De acuerdo a las respuestas recolectadas **2 de cada 3** participantes son mujeres.
 
-Para los puestos de liderazgo consideramos las personas en los puestos de *Director, Gerente, Jefe, Responsable,* y *Supervisor*.
+Para los puestos de liderazgo consideramos las personas en los puestos de *Gerente*, *Jefe*, *Responsable*, y *Supervisor*.
 
-Del total de **mujeres**, `r lideres_genero[1,3]` respuestas, `r lideres_genero[1,2]` ocupan un puesto de liderazgo (`r lideres_genero[1, 4]`).
+Del total de **mujeres**, `r lideres_genero[2,3]` respuestas, `r lideres_genero[1,2]` ocupan un puesto de liderazgo (`r lideres_genero[2, 4]`).
 
-Del total de **hombres**, `r lideres_genero[2, 3]` respuestas, `r lideres_genero[2,2]` ocupan un puesto de liderazgo (`r lideres_genero[2, 4]`).
+Del total de **hombres**, `r lideres_genero[1, 3]` respuestas, `r lideres_genero[2,2]` ocupan un puesto de liderazgo (`r lideres_genero[1, 4]`).
 
 Con un *p-value* igual a `r round(resultados_test[1,3],3)` podemos afirmar que **`r valor_test`**.
 ]
