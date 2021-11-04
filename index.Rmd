@@ -140,6 +140,7 @@ library(extrafont)
 library(scales)
 library(ggalt)
 library(kableExtra)
+library(wordcloud)
 
 options(scipen = 999)
 
@@ -577,6 +578,8 @@ En el listado de preguntas impresentables la peor de todas fue:
 ]
 
 .pull-right[
+Estas fueron algunas de las palabras que tuvimos que filtrar para este análisis.
+
 ```{r biz2,echo=TRUE, eval=FALSE}
 listado_preg <- preg %>% 
   filter(str_detect(pregunta, "hijo[s]")|
@@ -656,26 +659,51 @@ preg %>%
 ```{r nombre-area-plot, echo=FALSE, dpi=300}
 nombres <- kiwi21[ , 31]
 
-nombres <- nombres %>% 
-  rename(nombre = `¿Cómo se llama el área en tu empresa?`) %>% 
+nombres <- nombres %>%
+  rename(nombre = `¿Cómo se llama el área en tu empresa?`) %>%
   filter(!is.na(nombre))
 
 distintos <- distinct(.data = nombres) %>% count() %>% pull()
 
-nombres <- nombres %>% 
-  mutate(nombre = str_to_title(nombre, locale = "es")) %>% 
-  group_by(nombre) %>% 
-  count(sort = T, name = "rtas") %>% 
-  head(10) %>% 
+nombres <- nombres %>%
+  mutate(nombre = str_to_title(nombre, locale = "es")) %>%
+  group_by(nombre) %>%
+  count(sort = T, name = "rtas") %>%
+  head(10) %>%
   ungroup()
+ 
+
+# ggplot(nombres, aes(x = rtas, y = reorder(nombre,rtas))) +
+#   geom_col(fill = "#344D7E") +
+#   estilo +
+#   labs(title = "Top 10 de nombres para el área de RRHH",
+#        x = "", y = "", caption = fuente) +
+#   theme(plot.title.position = "plot")
+
+# Nube de palabras
+nombre <- kiwi21[,31]
+
+nombre <- nombre %>%
+  rename(area = `¿Cómo se llama el área en tu empresa?`) %>% 
+  filter(!is.na(area)) %>% 
+  mutate(area = str_replace(area, "Adm. De personal", "Administración de Personal"),
+         area = str_replace(area, "GESTION DE DESARROLLO HUMANO", "Gestión de Desarrollo Humano" ),
+         area = tolower(area))
+
+nombre <- nombre %>% 
+tidytext::unnest_tokens(word, area)
+
+nombre <- nombre %>% 
+  group_by(word) %>% 
+  tally(sort = T) 
+
+set.seed(99)
+wordcloud(words = nombre$word, freq = nombre$n, random.order = F,
+           rot.per = 0.35, scale= c(7.5, 1.8), family = "Roboto", 
+           colors=brewer.pal(8, "Dark2"))
 
 
-ggplot(nombres, aes(x = rtas, y = reorder(nombre,rtas))) +
-  geom_col(fill = "#344D7E") +
-  estilo +
-  labs(title = "Top 10 de nombres para el área de RRHH", 
-       x = "", y = "", caption = fuente) +
-  theme(plot.title.position = "plot")
+rm(nombre)
 ```
 
 ]
@@ -686,9 +714,9 @@ En total, encontramos `r distintos` formas diferentes de llamar al área. En com
 
 
 ```{r nombre-area-tabla, echo=FALSE, out.width="70%"}
-gt(nombres) %>% 
+gt(nombres) %>%
   cols_label(nombre = "Nombre del Área",
-             rtas = "Respuestas") %>% 
+             rtas = "Respuestas") %>%
   tab_style(style = list(
     cell_fill = "#F8FF00"),
     locations = cells_body(
@@ -697,6 +725,7 @@ gt(nombres) %>%
     ))
 ```
 ]
+
 ---
 class: inverse, center, middle
 

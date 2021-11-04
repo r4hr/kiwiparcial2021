@@ -1,4 +1,5 @@
 # Paquetes ----
+# https://media.giphy.com/media/3o6Mbhi5olzmJNuUvu/giphy.gif
 
 library(tidyverse)
 library(googlesheets4)
@@ -8,8 +9,7 @@ library(scales)
 library(ggalt)
 library(data.table)
 library(kableExtra)
-library(tidytext)
-library(wordcloud2)
+library(wordcloud)
 
 # Datasets ----
 
@@ -137,3 +137,29 @@ sueldos_dolar <- kiwi21 %>%
          sueldo_bruto = `¿Cuál es tu remuneración BRUTA MENSUAL en tu moneda local? (antes de impuestos y deducciones)`,
          tipo_contratacion = `Tipo de contratación`)
 
+# Wordcloud ------
+
+names(kiwi21)
+
+nombre <- kiwi21[,31]
+nombre <- nombre %>%
+  rename(area = `¿Cómo se llama el área en tu empresa?`) %>% 
+  filter(!is.na(area)) %>% 
+  mutate(area = str_replace(area, "Adm. De personal", "Administración de Personal"),
+         area = str_replace(area, "GESTION DE DESARROLLO HUMANO", "Gestión de Desarrollo Humano" ),
+         area = tolower(area))
+
+unique(nombre$area, sort = T)
+
+nombre <- nombre %>% 
+tidytext::unnest_tokens(word, area)
+
+
+nombre <- nombre %>% 
+  group_by(word) %>% 
+  tally(sort = T) 
+
+wordcloud(words = nombre$word, freq = nombre$n, random.order = F,
+          rot.per = 0.35, scale= c(2.5,1), max.words = 200, colors=brewer.pal(8, "Dark2"))
+
+wordcloud2::wordcloud2(nombre)
