@@ -696,7 +696,6 @@ gt(nombres) %>%
       rows = nombre == "Oficina De Personal"
     ))
 ```
-
 ]
 ---
 class: inverse, center, middle

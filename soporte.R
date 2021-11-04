@@ -8,6 +8,8 @@ library(scales)
 library(ggalt)
 library(data.table)
 library(kableExtra)
+library(tidytext)
+library(wordcloud2)
 
 # Datasets ----
 
