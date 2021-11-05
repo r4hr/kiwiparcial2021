@@ -703,8 +703,7 @@ covid <- covid %>%
 p <- sankeyNetwork(Links = covid, Nodes = nodes,
                    Source = "id_source", Target = "id_target",
                    colourScale = my_color, fontSize = 8, fontFamily = "Roboto",
-                   Value = "n", NodeID = "name", sinksRight = TRUE,
-                   height = 420)
+                   Value = "n", NodeID = "name", sinksRight = TRUE)
 p
 
 
