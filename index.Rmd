@@ -568,7 +568,7 @@ ggplot(brecha_graf,
 ]
 
 .pull-right[
-En los únicos casos en que las mujeres tienen un sueldo promedio más alto que los hombres son en los puestos de *Gerente* y de *Analista* de acuerdo a la muestra recolectada por nuestra encuesta.
+En el único caso en que las mujeres tienen un sueldo promedio más alto que los hombres es en el puesto de *Analista* de acuerdo a la muestra recolectada por nuestra encuesta.
 
 
 ]
