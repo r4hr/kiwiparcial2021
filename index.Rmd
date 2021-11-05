@@ -330,8 +330,9 @@ ggplot(mediana_pais, aes(reorder(pais, -y), y =  y))+
 ---
 # Distribución de sueldos por puesto
 
-```{r posiciones}
-unique(sueldos_dolar$puesto)
+Es este gráfico podemos apreciar cómo se distribuyen los resultados, y el cuadrado rojo indica el salario promedio en la región. 
+<br>
+```{r posiciones, out.width="45%", fig.align='center'}
 
 sueldo_dolar_avg <- sueldos_dolar %>% 
   filter(puesto %in% c("Gerente", "Jefe", "Responsable", "HRBP", "Analista", "Administrativo")) %>% 
