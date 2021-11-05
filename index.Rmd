@@ -706,7 +706,8 @@ covid <- covid %>%
 p <- sankeyNetwork(Links = covid, Nodes = nodes,
                    Source = "id_source", Target = "id_target",
                    colourScale = my_color, fontSize = 8, fontFamily = "Roboto",
-                   Value = "n", NodeID = "name", sinksRight = TRUE, height = 600)
+                   Value = "n", NodeID = "name", sinksRight = TRUE, 
+                   height = 420)
 
 p
 
@@ -786,6 +787,21 @@ gt(nombres) %>%
       rows = nombre == "Oficina De Personal"
     ))
 ```
+]
+
+
+---
+class: inverse, middle
+
+# Sumá tu respuesta `r emo::ji("biceps")`
+.pull-left[
+<img src="https://media.giphy.com/media/l0MYRamKpDTaySHEQ/giphy.gif" />
+]
+
+.pull-right[
+Completá la encuesta! Cada respuesta es un gran aporte a la comunidad de RRHH.
+
+`r emo::ji("award")` [http://bit.ly/kiwi2021](http://bit.ly/kiwi2021)
 ]
 
 ---
