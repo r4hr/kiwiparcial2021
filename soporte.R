@@ -1,16 +1,8 @@
 # Paquetes ----
 # https://media.giphy.com/media/3o6Mbhi5olzmJNuUvu/giphy.gif
 
-library(tidyverse)
-library(googlesheets4)
-library(gargle)
-library(extrafont)
-library(scales)
-library(ggalt)
-library(data.table)
-library(kableExtra)
-library(wordcloud)
-library(networkD3)
+pacman::p_load(tidyverse, googlesheets4, gargle, extrafont, scales,
+               ggalt, kableExtra, wordcloud, networkD3)
 
 # Datasets ----
 
@@ -215,4 +207,116 @@ p <- sankeyNetwork(Links = covid, Nodes = nodes,
                    height = 300)
 p
 
+# Freelancers ----
 
+names(kiwi21)
+freelo <- kiwi21[, c(2:9, 56:70)]
+
+freelo <- freelo %>% 
+  rename(genero = `Identidad de Género`,
+         formacion = `Máximo nivel de formación`,
+         carrera = `¿Qué carrera de grado estudiaste?`,
+         pais = `País en el que trabajas`,
+         trayectoria = `¿Hace cuántos años trabajás como freelance?`,
+         espacio_trabajo = `¿Dónde trabajás habitualmente? (sin considerar la coyuntura por COVID-19)`,
+         exporta = `¿Exportás tus servicios?`,
+         colaboracion = `¿Trabajás con otros freelancers de tu mismo rubro?`,
+         es_recruiter = `¿Tu servicio principal está relacionado con búsqueda y selección?`,
+         recruiter_it = `¿Te dedicás principalmente a realizar búsquedas de IT/Tecnología?`,
+         servicio = `¿Cuál es el servicio principal que brindas? (si brindás más de un servicio, elegí el que más ingresos genere)`
+         ) %>% 
+  filter(Trabajo == "Freelance") %>% 
+  mutate(genero = fct_collapse(genero,"Mujer cis" = "Mujer"))
+
+freelo %>% 
+  count(genero, sort = T)
+
+freelo %>% 
+  count(es_recruiter)
+
+recruiters <- freelo %>% 
+  filter(es_recruiter == "Si")
+
+recruiters %>% 
+  count(recruiter_it)
+
+freelo %>% 
+  group_by(exporta, es_recruiter) %>% 
+  tally()
+
+
+
+## Gráfico de género freelo ----
+
+div <- freelo %>% 
+  select(genero) %>% 
+  mutate(genero = factor(genero, 
+                         levels = c("Mujer cis", "Hombre cis", 
+                                    "Prefiero no responder",
+                                    "No binario", "Gay"))) %>% 
+  group_by(genero) %>% 
+  summarise (n = n()) %>% 
+  mutate(freq = n/sum(n)) %>% 
+  arrange(-n)
+
+# Compute the cumulative percentages (top of each rectangle)
+div$ymax <- cumsum(div$freq)
+
+# Compute the bottom of each rectangle
+div$ymin <- c(0, head(div$ymax, n=-1))
+
+# Compute label position
+div$labelPosition <- (div$ymax + div$ymin) / 2
+
+# Compute a good label
+div$label <- paste0(div$genero, "\n Cant: ", div$n)
+
+# Make the plot
+ggplot(div, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=genero)) +
+  geom_rect() +
+  coord_polar(theta="y") + 
+  xlim(c(2, 4)) +
+  scale_fill_manual(values = c("#8624F5", "#1FC3AA", "#FFD129", "#75838F", "#7583FF")) +
+  theme_void() +
+  theme(legend.position = "right",
+        panel.background = element_blank(),
+        text = element_text(family = "Roboto")) +
+  labs(title = "Cantidad de respuestas según identidad de género",
+       subtitle = "Freelancers",
+       fill = "Género", 
+       caption = fuente)
+
+freelo %>% 
+  group_by(exporta, es_recruiter) %>% 
+  tally() %>% 
+  ggplot(aes(x = exporta, y = n, fill = es_recruiter)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = n), 
+            position = position_dodge(0.9),
+            vjust = -0.2)+
+  estiloh +
+  scale_fill_viridis_d(direction = -1) +
+  labs(title = "Proporción de exportadores de servicios",
+       subtitle = "Según sean servicios de reclutamiento o no",
+       x = "Exporta Servicios",
+       fill = "Es recruiter",
+       y = "",
+       caption = fuente)
+
+
+freelo %>% 
+  group_by(colaboracion, es_recruiter) %>% 
+  tally() %>% 
+  ggplot(aes(x = colaboracion, y = n, fill = es_recruiter)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = n), 
+            position = position_dodge(0.9),
+            vjust = -0.2)+
+  estiloh +
+  scale_fill_viridis_d(direction = -1) +
+  labs(title = "Proporción de exportadores de servicios",
+       subtitle = "Según sean servicios de reclutamiento o no",
+       x = "Exporta Servicios",
+       fill = "Es recruiter",
+       y = "",
+       caption = fuente)

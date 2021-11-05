@@ -330,9 +330,9 @@ ggplot(mediana_pais, aes(reorder(pais, -y), y =  y))+
 ---
 # Distribución de sueldos por puesto
 
-Es este gráfico podemos apreciar cómo se distribuyen los resultados, y el cuadrado rojo indica el salario promedio en la región. 
+Es este gráfico podemos apreciar cómo se distribuyen los resultados, y el cuadrado rojo indica el salario promedio en la región. Cuando terminemos con el relevamiento publicamos los resultados para cada país `r emo::ji("sassy")`.
 <br>
-```{r posiciones, out.width="45%", fig.align='center'}
+```{r posiciones, out.width="40%", fig.align='center'}
 
 sueldo_dolar_avg <- sueldos_dolar %>% 
   filter(puesto %in% c("Gerente", "Jefe", "Responsable", "HRBP", "Analista", "Administrativo")) %>% 
@@ -570,7 +570,6 @@ ggplot(brecha_graf,
 .pull-right[
 En los únicos casos en que las mujeres tienen un sueldo promedio más alto que los hombres son en los puestos de *Gerente* y de *Analista* de acuerdo a la muestra recolectada por nuestra encuesta.
 
-Agradecemos a [Natsumi Shokida](https://twitter.com/NatsuSh) por permitirnos replicar el gráfico de *"Brecha de ingresos mensuales por calificación del puesto de trabajo"* del informe ["La desigualdad de género se puede medir"](https://ecofeminita.github.io/EcoFemiData/informe_desigualdad_genero/trim_2019_03/informe.nb.html#) que realizan para Economía Femini(s)ta.
 
 ]
 
@@ -818,6 +817,161 @@ gt(nombres) %>%
 ```
 ]
 
+---
+class: inverse, middle, center
+
+<img src="https://media.giphy.com/media/3o6Mbhi5olzmJNuUvu/giphy.gif" />
+
+# Freelancers
+
+---
+# Freelancers
+
+.pull-left[
+
+```{r freelo-base}
+freelo <- kiwi21[, c(2:9, 56:70)]
+
+freelo <- freelo %>% 
+  rename(genero = `Identidad de Género`,
+         formacion = `Máximo nivel de formación`,
+         carrera = `¿Qué carrera de grado estudiaste?`,
+         pais = `País en el que trabajas`,
+         trayectoria = `¿Hace cuántos años trabajás como freelance?`,
+         espacio_trabajo = `¿Dónde trabajás habitualmente? (sin considerar la coyuntura por COVID-19)`,
+         exporta = `¿Exportás tus servicios?`,
+         colaboracion = `¿Trabajás con otros freelancers de tu mismo rubro?`,
+         es_recruiter = `¿Tu servicio principal está relacionado con búsqueda y selección?`,
+         recruiter_it = `¿Te dedicás principalmente a realizar búsquedas de IT/Tecnología?`,
+         servicio = `¿Cuál es el servicio principal que brindas? (si brindás más de un servicio, elegí el que más ingresos genere)`
+         ) %>% 
+  filter(Trabajo == "Freelance") %>% 
+  mutate(genero = fct_collapse(genero,"Mujer cis" = "Mujer"))
+
+recluta <- freelo %>% 
+  count(es_recruiter)
+
+```
+
+Este año participaron `r nrow(freelo)` freelancers `r emo::ji("juggle")`, de los cuales `r recluta[2,2]` se dedican a servicios de reclutamiento, y `r recluta[1,2]` se dedican a otros servicios, como *Diseño Organizacional*, *Payroll*, *People Analytics* entre otros.
+]
+
+.pull-right[
+```{r freelo-igenero}
+div <- freelo %>% 
+  select(genero) %>% 
+  mutate(genero = factor(genero, 
+                         levels = c("Mujer cis", "Hombre cis", 
+                                    "Prefiero no responder",
+                                    "No binario", "Gay"))) %>% 
+  group_by(genero) %>% 
+  summarise (n = n()) %>% 
+  mutate(freq = n/sum(n)) %>% 
+  arrange(-n)
+
+# Compute the cumulative percentages (top of each rectangle)
+div$ymax <- cumsum(div$freq)
+
+# Compute the bottom of each rectangle
+div$ymin <- c(0, head(div$ymax, n=-1))
+
+# Compute label position
+div$labelPosition <- (div$ymax + div$ymin) / 2
+
+# Compute a good label
+div$label <- paste0(div$genero, "\n Cant: ", div$n)
+
+# Make the plot
+ggplot(div, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=genero)) +
+  geom_rect() +
+  coord_polar(theta="y") + 
+  xlim(c(2, 4)) +
+  scale_fill_manual(values = c("#8624F5", "#1FC3AA", "#FFD129", "#75838F", "#7583FF")) +
+  theme_void() +
+  theme(legend.position = "right",
+        panel.background = element_blank(),
+        text = element_text(family = "Roboto")) +
+  labs(title = "Cantidad de respuestas según identidad de género",
+       subtitle = "Freelancers",
+       fill = "Género", 
+       caption = fuente)
+
+```
+
+]
+
+---
+## Exportación de servicios
+
+.pull-left[
+```{r exporta}
+
+exportador <- freelo %>% 
+  count(exporta) %>% 
+  mutate(porcentaje = n/sum(n))
+
+```
+
+Del total de los freelancers que participaron de la encuesta, el `r percent(pull(exportador[2,3]))` exporta sus servicios a otros países.
+
+La representación de los que exportan servicios, de los que no, en función de si el servicio principal está relacionado con reclutamiento o no, la podemos apreciar en el siguiente gráfico.
+
+
+]
+.pull-right[
+
+```{r exporta-plot}
+freelo %>% 
+  group_by(exporta, es_recruiter) %>% 
+  tally() %>% 
+  ggplot(aes(x = exporta, y = n, fill = es_recruiter)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = n), 
+            position = position_dodge(0.9),
+            vjust = -0.2)+
+  estilo +
+  scale_fill_viridis_d(direction = -1) +
+  labs(title = "Proporción de exportadores de servicios",
+       subtitle = "Según sean servicios de reclutamiento o no",
+       x = "Exporta Servicios",
+       fill = "Es recruiter",
+       y = "",
+       caption = fuente)
+```
+
+]
+
+---
+# Colaboración entre freelancers
+
+.pull-left[
+
+```{r colaboracion}
+freelo %>% 
+  group_by(colaboracion, es_recruiter) %>% 
+  tally() %>% 
+  ggplot(aes(x = colaboracion, y = n, fill = es_recruiter)) +
+  geom_col(position = "dodge") +
+  geom_text(aes(label = n), 
+            position = position_dodge(0.9),
+            vjust = -0.2)+
+  estiloh +
+  scale_fill_viridis_d(direction = -1) +
+  labs(title = "¿Colaboras con freelancers que brindan tu mismo servicio?",
+       subtitle = "Según sean servicios de reclutamiento o no",
+       x = "Colabora con otros freelancers",
+       fill = "Es recruiter",
+       y = "",
+       caption = fuente)
+```
+
+]
+
+.pull-right[
+Algo que nos encantó descubrir en las respuestas de las personas que trabajan de manera freelance, es que la mayoría colabora con colegas que se dedican a brindar los mismos servicios. `r emo::ji("beers")`
+
+Esto es una práctica que ojalá se multiplique cada vez más.
+]
 
 ---
 class: inverse, middle
@@ -857,6 +1011,8 @@ class: inverse, center, middle
 * [extrafont](https://CRAN.R-project.org/package=extrafont): Winston Chang, (2014). extrafont: Tools for using fonts. R package version 0.17.
 ---
 class: inverse, center, bottom
+
+Agradecemos a [Natsumi Shokida](https://twitter.com/NatsuSh) por permitirnos replicar el gráfico de *"Brecha de ingresos mensuales por calificación del puesto de trabajo"* del informe ["La desigualdad de género se puede medir"](https://ecofeminita.github.io/EcoFemiData/informe_desigualdad_genero/trim_2019_03/informe.nb.html#) que realizan para Economía Femini(s)ta.
 
 Muchas gracias a [Ivana Feldfeber](https://www.linkedin.com/in/ivana-feldfeber/) del [Observatorio de Datos con Perspectiva de Género](https://sites.google.com/view/datagenero) por la paciencia y el asesoramiento en las definiciones sobre las preguntas de Identidad de Género y las relacionadas con diversidad.
 
