@@ -100,6 +100,7 @@ background-color: "#5d6d7e"
 ]
 
 .pull-right[<img src="archivos/kiwi-happy.jpg"  />]
+
 ---
 background-color: "#5d6d7e" 
 # ¿Aún no completaste la encuesta?
@@ -131,16 +132,8 @@ El 30 de noviembre publicamos los resultados finales.
 
 
 ```{r carga}
-library(tidyverse)
-library(googlesheets4)
-library(gargle)
-library(gt)
-library(extrafont)
-library(scales)
-library(ggalt)
-library(kableExtra)
-library(wordcloud)
-library(networkD3)
+pacman::p_load(tidyverse, googlesheets4, gargle, gt, extrafont, scales, ggalt, kableExtra, wordcloud, networkD3)
+
 
 options(scipen = 999)
 
@@ -151,6 +144,12 @@ estilo <- theme(panel.grid = element_blank(),
                 plot.background = element_rect(fill = "#fbfcfc"),
                 panel.background = element_blank(),
                 text = element_text(family = "Roboto"))
+
+estiloh <- theme(panel.grid = element_blank(),
+                 plot.background = element_rect(fill = "#FBFCFC"),
+                 panel.background = element_blank(),
+                 panel.grid.major.y = element_line(color = "#AEB6BF"),
+                 text = element_text(family = "Roboto"))
 
 fuente <- "Fuente: Encuesta KIWI de Sueldos de RRHH para Latam"
 
@@ -327,6 +326,35 @@ ggplot(mediana_pais, aes(reorder(pais, -y), y =  y))+
 3. Sólo mostramos resultados de los países con al menos 5 respuestas.
 4. Podamos los sueldos para mostrar aquellos que están dentro de los percentiles 5 y 95.
 ]
+
+---
+# Distribución de sueldos por puesto
+
+```{r posiciones}
+unique(sueldos_dolar$puesto)
+
+sueldo_dolar_avg <- sueldos_dolar %>% 
+  filter(puesto %in% c("Gerente", "Jefe", "Responsable", "HRBP", "Analista", "Administrativo")) %>% 
+  mutate(puesto = factor(puesto,
+                         levels = c("Gerente", "Jefe", "Responsable", "HRBP", "Analista", "Administrativo"))) %>% 
+  group_by(puesto) %>% 
+  summarise(sueldo_dolar_promedio = mean(sueldo_dolar))
+
+sueldos_dolar %>% 
+  filter(puesto %in% c("Gerente", "Jefe", "Responsable", "HRBP", "Analista", "Administrativo")) %>% 
+  mutate(puesto = factor(puesto,
+                         levels = c("Gerente", "Jefe", "Responsable", "HRBP", "Analista", "Administrativo"))) %>% 
+  ggplot(aes(x = puesto, y = sueldo_dolar)) +
+  geom_point(color = "#344D7E", alpha = 0.4, position = position_jitter(width = 0.2)) +
+  geom_point(data = sueldo_dolar_avg, aes(x = puesto, y = sueldo_dolar_promedio), shape = 15, color = "red", size = 2) +
+  estiloh +
+  scale_y_continuous(labels = comma_format(big.mark = ".", decimal.mark = ",")) +
+  labs(title = "Sueldos por posición en Latinoamérica",
+       subtitle = "Todos los países de la muestra",
+       x = "", y = "Sueldo en U$S",
+       caption = paste0("El cuadrado rojo indica el promedio de cada posición\n",
+                        fuente))
+```
 
 ---
 # Representación de mujeres en puestos de liderazgo
