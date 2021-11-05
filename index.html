@@ -31,6 +31,10 @@
     <script src="index_files/xaringanExtra-shareagain-0.2.6/shareagain.js"></script>
     <script src="index_files/kePrint-0.0.1/kePrint.js"></script>
     <link href="index_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <script src="index_files/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="index_files/d3-4.5.0/d3.min.js"></script>
+    <script src="index_files/sankey-1/sankey.js"></script>
+    <script src="index_files/sankeyNetwork-binding-0.4/sankeyNetwork.js"></script>
   </head>
   <body>
     <textarea id="source">
@@ -110,7 +114,7 @@ background-color: "#5d6d7e"
 ### Completá la encuesta en [este link](https://bit.ly/kiwi2021)
 
 &lt;br&gt;
-### El tiempo aproximado para completarla es de 7'26" #chequeadísimo 👩‍🔬
+### El tiempo aproximado para completarla es de 7'26" #chequeadísimo 👨‍🔬
 
 ]
 
@@ -137,11 +141,11 @@ El 30 de noviembre publicamos los resultados finales.
 &lt;tbody&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Argentina &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 339 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 341 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Perú &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Bolivia &lt;/td&gt;
@@ -194,7 +198,7 @@ El 30 de noviembre publicamos los resultados finales.
 &lt;/tbody&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;br&gt;
-Recibimos un total de 422 respuestas 🥳.
+Recibimos un total de 425 respuestas 🎉.
 
 ---
 # Participantes
@@ -238,12 +242,12 @@ La representación de ambos tipos de trabajadores es la siguiente:
 ]
 
 .pull-right[
-<div id="swzdhtuhzr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bycvtfaaoz" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#swzdhtuhzr .gt_table {
+#bycvtfaaoz .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -268,7 +272,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-left-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_heading {
+#bycvtfaaoz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -280,7 +284,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-right-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_title {
+#bycvtfaaoz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -290,7 +294,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-bottom-width: 0;
 }
 
-#swzdhtuhzr .gt_subtitle {
+#bycvtfaaoz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -300,13 +304,13 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-top-width: 0;
 }
 
-#swzdhtuhzr .gt_bottom_border {
+#bycvtfaaoz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_col_headings {
+#bycvtfaaoz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -321,7 +325,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-right-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_col_heading {
+#bycvtfaaoz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -341,7 +345,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   overflow-x: hidden;
 }
 
-#swzdhtuhzr .gt_column_spanner_outer {
+#bycvtfaaoz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -353,15 +357,15 @@ La representación de ambos tipos de trabajadores es la siguiente:
   padding-right: 4px;
 }
 
-#swzdhtuhzr .gt_column_spanner_outer:first-child {
+#bycvtfaaoz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#swzdhtuhzr .gt_column_spanner_outer:last-child {
+#bycvtfaaoz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#swzdhtuhzr .gt_column_spanner {
+#bycvtfaaoz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -373,7 +377,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   width: 100%;
 }
 
-#swzdhtuhzr .gt_group_heading {
+#bycvtfaaoz .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -395,7 +399,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   vertical-align: middle;
 }
 
-#swzdhtuhzr .gt_empty_group_heading {
+#bycvtfaaoz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -410,15 +414,15 @@ La representación de ambos tipos de trabajadores es la siguiente:
   vertical-align: middle;
 }
 
-#swzdhtuhzr .gt_from_md > :first-child {
+#bycvtfaaoz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#swzdhtuhzr .gt_from_md > :last-child {
+#bycvtfaaoz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#swzdhtuhzr .gt_row {
+#bycvtfaaoz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -437,7 +441,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   overflow-x: hidden;
 }
 
-#swzdhtuhzr .gt_stub {
+#bycvtfaaoz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -449,7 +453,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   padding-left: 12px;
 }
 
-#swzdhtuhzr .gt_summary_row {
+#bycvtfaaoz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -459,7 +463,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   padding-right: 5px;
 }
 
-#swzdhtuhzr .gt_first_summary_row {
+#bycvtfaaoz .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -469,7 +473,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-top-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_grand_summary_row {
+#bycvtfaaoz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -479,7 +483,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   padding-right: 5px;
 }
 
-#swzdhtuhzr .gt_first_grand_summary_row {
+#bycvtfaaoz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -489,11 +493,11 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-top-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_striped {
+#bycvtfaaoz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#swzdhtuhzr .gt_table_body {
+#bycvtfaaoz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -502,7 +506,7 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-bottom-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_footnotes {
+#bycvtfaaoz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -516,13 +520,13 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-right-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_footnote {
+#bycvtfaaoz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#swzdhtuhzr .gt_sourcenotes {
+#bycvtfaaoz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -536,41 +540,41 @@ La representación de ambos tipos de trabajadores es la siguiente:
   border-right-color: #D3D3D3;
 }
 
-#swzdhtuhzr .gt_sourcenote {
+#bycvtfaaoz .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#swzdhtuhzr .gt_left {
+#bycvtfaaoz .gt_left {
   text-align: left;
 }
 
-#swzdhtuhzr .gt_center {
+#bycvtfaaoz .gt_center {
   text-align: center;
 }
 
-#swzdhtuhzr .gt_right {
+#bycvtfaaoz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#swzdhtuhzr .gt_font_normal {
+#bycvtfaaoz .gt_font_normal {
   font-weight: normal;
 }
 
-#swzdhtuhzr .gt_font_bold {
+#bycvtfaaoz .gt_font_bold {
   font-weight: bold;
 }
 
-#swzdhtuhzr .gt_font_italic {
+#bycvtfaaoz .gt_font_italic {
   font-style: italic;
 }
 
-#swzdhtuhzr .gt_super {
+#bycvtfaaoz .gt_super {
   font-size: 65%;
 }
 
-#swzdhtuhzr .gt_footnote_marks {
+#bycvtfaaoz .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -592,11 +596,11 @@ La representación de ambos tipos de trabajadores es la siguiente:
   </thead>
   <tbody class="gt_table_body">
     <tr><td class="gt_row gt_center">Mujer cis</td>
-<td class="gt_row gt_center">266</td>
-<td class="gt_row gt_center">68.9&percnt;</td></tr>
+<td class="gt_row gt_center">269</td>
+<td class="gt_row gt_center">69.2&percnt;</td></tr>
     <tr><td class="gt_row gt_center">Hombre cis</td>
 <td class="gt_row gt_center">115</td>
-<td class="gt_row gt_center">29.8&percnt;</td></tr>
+<td class="gt_row gt_center">29.6&percnt;</td></tr>
     <tr><td class="gt_row gt_center">Prefiero no responder</td>
 <td class="gt_row gt_center">4</td>
 <td class="gt_row gt_center">1.0&percnt;</td></tr>
@@ -627,9 +631,9 @@ De acuerdo a las respuestas recolectadas **2 de cada 3** participantes son mujer
 
 Para los puestos de liderazgo consideramos las personas en los puestos de *Gerente*, *Jefe*, *Responsable*, y *Supervisor*.
 
-Del total de **mujeres**, 266 respuestas, 57 ocupan un puesto de liderazgo (30%).
+Del total de **mujeres**, 269 respuestas, 57 ocupan un puesto de liderazgo (30%).
 
-Del total de **hombres**, 115 respuestas, 79 ocupan un puesto de liderazgo (50%).
+Del total de **hombres**, 115 respuestas, 80 ocupan un puesto de liderazgo (50%).
 
 Con un *p-value* igual a 0.569 podemos afirmar que **la diferencia es estadísticamente significativa, y la proporción de hombres en puestos de liderazgo es mayor que el de las mujeres**.
 ]
@@ -694,12 +698,12 @@ listado_preg &lt;- preg %&gt;%
 ## "¿Pensás tener hijos?"/"¿Por qué no estás casada?"
 
 .pull-left[Al respecto quisimos saber a cuántas mujeres y hombres les habían hecho preguntas desubicadas sobre si tendrían hijos, o si tenían planes de casamiento. En 48 respuestas esto es lo que encontramos:
-<div id="xptksqmght" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qykbwgvfdf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xptksqmght .gt_table {
+#qykbwgvfdf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -724,7 +728,7 @@ listado_preg &lt;- preg %&gt;%
   border-left-color: #D3D3D3;
 }
 
-#xptksqmght .gt_heading {
+#qykbwgvfdf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -736,7 +740,7 @@ listado_preg &lt;- preg %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#xptksqmght .gt_title {
+#qykbwgvfdf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -746,7 +750,7 @@ listado_preg &lt;- preg %&gt;%
   border-bottom-width: 0;
 }
 
-#xptksqmght .gt_subtitle {
+#qykbwgvfdf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -756,13 +760,13 @@ listado_preg &lt;- preg %&gt;%
   border-top-width: 0;
 }
 
-#xptksqmght .gt_bottom_border {
+#qykbwgvfdf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xptksqmght .gt_col_headings {
+#qykbwgvfdf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -777,7 +781,7 @@ listado_preg &lt;- preg %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#xptksqmght .gt_col_heading {
+#qykbwgvfdf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -797,7 +801,7 @@ listado_preg &lt;- preg %&gt;%
   overflow-x: hidden;
 }
 
-#xptksqmght .gt_column_spanner_outer {
+#qykbwgvfdf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -809,15 +813,15 @@ listado_preg &lt;- preg %&gt;%
   padding-right: 4px;
 }
 
-#xptksqmght .gt_column_spanner_outer:first-child {
+#qykbwgvfdf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xptksqmght .gt_column_spanner_outer:last-child {
+#qykbwgvfdf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xptksqmght .gt_column_spanner {
+#qykbwgvfdf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -829,7 +833,7 @@ listado_preg &lt;- preg %&gt;%
   width: 100%;
 }
 
-#xptksqmght .gt_group_heading {
+#qykbwgvfdf .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -851,7 +855,7 @@ listado_preg &lt;- preg %&gt;%
   vertical-align: middle;
 }
 
-#xptksqmght .gt_empty_group_heading {
+#qykbwgvfdf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -866,15 +870,15 @@ listado_preg &lt;- preg %&gt;%
   vertical-align: middle;
 }
 
-#xptksqmght .gt_from_md > :first-child {
+#qykbwgvfdf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xptksqmght .gt_from_md > :last-child {
+#qykbwgvfdf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xptksqmght .gt_row {
+#qykbwgvfdf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -893,7 +897,7 @@ listado_preg &lt;- preg %&gt;%
   overflow-x: hidden;
 }
 
-#xptksqmght .gt_stub {
+#qykbwgvfdf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -905,7 +909,7 @@ listado_preg &lt;- preg %&gt;%
   padding-left: 12px;
 }
 
-#xptksqmght .gt_summary_row {
+#qykbwgvfdf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -915,7 +919,7 @@ listado_preg &lt;- preg %&gt;%
   padding-right: 5px;
 }
 
-#xptksqmght .gt_first_summary_row {
+#qykbwgvfdf .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -925,7 +929,7 @@ listado_preg &lt;- preg %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#xptksqmght .gt_grand_summary_row {
+#qykbwgvfdf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -935,7 +939,7 @@ listado_preg &lt;- preg %&gt;%
   padding-right: 5px;
 }
 
-#xptksqmght .gt_first_grand_summary_row {
+#qykbwgvfdf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -945,11 +949,11 @@ listado_preg &lt;- preg %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#xptksqmght .gt_striped {
+#qykbwgvfdf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xptksqmght .gt_table_body {
+#qykbwgvfdf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -958,7 +962,7 @@ listado_preg &lt;- preg %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#xptksqmght .gt_footnotes {
+#qykbwgvfdf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -972,13 +976,13 @@ listado_preg &lt;- preg %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#xptksqmght .gt_footnote {
+#qykbwgvfdf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#xptksqmght .gt_sourcenotes {
+#qykbwgvfdf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -992,41 +996,41 @@ listado_preg &lt;- preg %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#xptksqmght .gt_sourcenote {
+#qykbwgvfdf .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#xptksqmght .gt_left {
+#qykbwgvfdf .gt_left {
   text-align: left;
 }
 
-#xptksqmght .gt_center {
+#qykbwgvfdf .gt_center {
   text-align: center;
 }
 
-#xptksqmght .gt_right {
+#qykbwgvfdf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xptksqmght .gt_font_normal {
+#qykbwgvfdf .gt_font_normal {
   font-weight: normal;
 }
 
-#xptksqmght .gt_font_bold {
+#qykbwgvfdf .gt_font_bold {
   font-weight: bold;
 }
 
-#xptksqmght .gt_font_italic {
+#qykbwgvfdf .gt_font_italic {
   font-style: italic;
 }
 
-#xptksqmght .gt_super {
+#qykbwgvfdf .gt_super {
   font-size: 65%;
 }
 
-#xptksqmght .gt_footnote_marks {
+#qykbwgvfdf .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1061,6 +1065,16 @@ listado_preg &lt;- preg %&gt;%
 .pull-right[
 &lt;img src="index_files/figure-html/bizar-plot-1.png" width="85%" /&gt;
 
+]
+
+---
+# Retorno a las oficinas
+
+En esta oportunidad estamos relevando si la decisión de retornar a la oficina es de común acuerdo o de manera unilateral de parte de la empresa o de las personas, y analizar el nivel de satisfacción.
+
+.center[
+<div id="htmlwidget-c5ff5d563e1746bb6561" style="width:65%;height:420px;" class="sankeyNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c5ff5d563e1746bb6561">{"x":{"links":{"source":[0,0,0,0,0,1,1,1,1,1,2,2],"target":[3,4,5,6,7,3,4,5,6,7,6,7],"value":[8,14,3,12,15,39,54,17,25,17,1,1]},"nodes":{"name":["De común acuerdo","De la empresa","Del empleado","Algo insatisfecho","Algo satisfecho","Muy instatisfecho","Muy satisfecho","No aplica / Prefiero no responder"],"group":["De común acuerdo","De la empresa","Del empleado","Algo insatisfecho","Algo satisfecho","Muy instatisfecho","Muy satisfecho","No aplica / Prefiero no responder"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal() .domain([\"De común acuerdo\", \"De la empresa\",\"Del empleado\", \n\"Algo insatisfecho\", \"Algo satisfecho\", \"Muy insatisfecho\", \"Muy satisfecho\", \"No aplica / Prefiero no responder\"])\n.range([\"blue\", \"purple\" , \"orange\", \"orange\", \"gray\", \"yellow\", \"purple\", \"purple\"])","fontSize":8,"fontFamily":"Roboto","nodeWidth":15,"nodePadding":10,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":true}},"evals":[],"jsHooks":[]}</script>
 ]
 
 ---
@@ -1424,13 +1438,13 @@ En total, encontramos 46 formas diferentes de llamar al área. En comparación c
   </thead>
   <tbody class="gt_table_body">
     <tr><td class="gt_row gt_left">Recursos Humanos</td>
-<td class="gt_row gt_right">201</td></tr>
+<td class="gt_row gt_right">202</td></tr>
     <tr><td class="gt_row gt_left">Capital Humano</td>
 <td class="gt_row gt_right">33</td></tr>
     <tr><td class="gt_row gt_left">Talento Humano</td>
-<td class="gt_row gt_right">21</td></tr>
+<td class="gt_row gt_right">22</td></tr>
     <tr><td class="gt_row gt_left">People</td>
-<td class="gt_row gt_right">11</td></tr>
+<td class="gt_row gt_right">12</td></tr>
     <tr><td class="gt_row gt_left">Gestión De Personas</td>
 <td class="gt_row gt_right">7</td></tr>
     <tr><td class="gt_row gt_left" style="#F8FF00">Oficina De Personal</td>

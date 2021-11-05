@@ -10,6 +10,7 @@ library(ggalt)
 library(data.table)
 library(kableExtra)
 library(wordcloud)
+library(networkD3)
 
 # Datasets ----
 
@@ -163,3 +164,55 @@ wordcloud(words = nombre$word, freq = nombre$n, random.order = F,
           rot.per = 0.35, scale= c(2.5,1), max.words = 200, colors=brewer.pal(8, "Dark2"))
 
 wordcloud2::wordcloud2(nombre)
+
+# Covid-19 -----
+
+names(kiwi21)
+covid <- kiwi21[,c(51,54)]
+
+#var_original <- names(covid)
+
+names(covid) <- c("decision", "satisfaccion")
+
+
+covid <- covid %>% 
+  filter(!is.na(satisfaccion),
+         decision != "No aplica")
+
+
+
+covid <- covid %>% 
+  group_by(decision, satisfaccion) %>% 
+  tally()
+
+nodes <- data.frame(
+  name = c(as.character(covid$decision),
+           as.character(covid$satisfaccion)) %>% 
+    unique()
+)
+
+
+covid$id_source <- match(covid$decision, nodes$name) - 1
+covid$id_target <- match(covid$satisfaccion, nodes$name) -1
+
+# prepare color scale: I give one specific color for each node.
+my_color <- 'd3.scaleOrdinal() .domain(["De común acuerdo", "De la empresa","Del empleado", 
+"Algo insatisfecho", "Algo satisfecho", "Muy insatisfecho", "Muy satisfecho", "No aplica / Prefiero no responder"])
+.range(["blue", "purple" , "orange", "orange", "gray", "yellow", "purple", "purple"])'
+
+
+
+covid <- covid %>%
+  mutate(satisfaccion = factor(satisfaccion,
+                           levels = c("No aplica / Prefiero no responder", "Muy instatisfecho",
+                                      "Algo insatisfecho", "Algo satisfecho", "Muy satisfecho")))
+
+
+p <- sankeyNetwork(Links = covid, Nodes = nodes,
+                   Source = "id_source", Target = "id_target",
+                   colourScale = my_color, fontSize = 8, fontFamily = "Roboto",
+                   Value = "n", NodeID = "name", sinksRight = TRUE,
+                   height = 300)
+p
+
+
