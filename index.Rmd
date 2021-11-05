@@ -127,11 +127,10 @@ class: inverse, center, middle
 El 30 de noviembre publicamos los resultados finales.
 
 ---
-# Participación
-## Respuestas por países
+# Respuestas por países
 
 
-```{r carga, echo=FALSE, message=FALSE, warning=FALSE}
+```{r carga}
 library(tidyverse)
 library(googlesheets4)
 library(gargle)
@@ -157,11 +156,17 @@ fuente <- "Fuente: Encuesta KIWI de Sueldos de RRHH para Latam"
 
 colores <-  c("#8624F5", "#1FC3AA")
 
-kiwi <- read_sheet("1aeuu9dVfN42EjyvbmhEcsf0ilSz2DiXU-0MpnF896ss")
 kiwi21 <- read_sheet("1nhpqDWuJoWhiVj0rIaV51-SdfnSxTpbV3Vcd3iYmyTw")
 # Tipo de cambio
 tc <- read_sheet("194DbwO2TNmYkWU5Ru1m6UxuOCfXxuRlFcrWrP_JzGv8") %>% 
   select(pais, tipo_cambio)
+
+```
+
+
+Recibimos un total de `r nrow(kiwi21)` respuestas `r emo::ji("party")`.
+<br>
+```{r paises}
 
 paises <- kiwi21 %>% 
   select(pais = `País en el que trabajas`) %>% 
@@ -178,8 +183,6 @@ paises %>%
   kable_paper("hover", full_width = F) %>% 
   scroll_box(height = "450px")
 ```
-<br>
-Recibimos un total de `r nrow(kiwi21)` respuestas `r emo::ji("party")`.
 
 ---
 # Participantes
@@ -520,7 +523,7 @@ ggplot(brecha_graf,
                 colour_x = colores[1],
                 colour_xend = colores[2]) +
   geom_text(data = brecha_graf, 
-            aes(x, puesto, label = brecha), size =3,
+            aes(x, puesto, label = brecha), size = 4,
             nudge_y = .2) +
   labs(title = "Brecha salarial por puestos de RRHH",
        subtitle = "Sueldos promedios en Argentina",
@@ -703,7 +706,8 @@ covid <- covid %>%
 p <- sankeyNetwork(Links = covid, Nodes = nodes,
                    Source = "id_source", Target = "id_target",
                    colourScale = my_color, fontSize = 8, fontFamily = "Roboto",
-                   Value = "n", NodeID = "name", sinksRight = TRUE)
+                   Value = "n", NodeID = "name", sinksRight = TRUE, height = 600)
+
 p
 
 
