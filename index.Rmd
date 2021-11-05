@@ -971,6 +971,8 @@ freelo %>%
 Algo que nos encantó descubrir en las respuestas de las personas que trabajan de manera freelance, es que la mayoría colabora con colegas que se dedican a brindar los mismos servicios. `r emo::ji("beers")`
 
 Esto es una práctica que ojalá se multiplique cada vez más.
+
+<img src="https://media.giphy.com/media/26tP24Yd1GznbcXEQ/giphy.gif" />
 ]
 
 ---
