@@ -14,7 +14,7 @@ Estaremos recibiendo respuestas hasta el 15 de Noviembre de 2021. Las respuestas
 
 Los resultados de la 1° Encuesta KIWI de Sueldos de RRHH para Latam la [pueden ver en este link](https://rpubs.com/Data4HR/encuesta-kiwi-2020). Además de los resultados, en el documento pueden acceder al código fuente, y también a una versión pública de los datos.
 
-\<a rel="license" href="[http://creativecommons.org/licenses/by-nc/4.0/"](http://creativecommons.org/licenses/by-nc/4.0/")\<img alt="Licencia Creative Commons" style="border-width:0" src="[https://i.creativecommons.org/l/by-nc/4.0/88x31.png"](https://i.creativecommons.org/l/by-nc/4.0/88x31.png") />\</a>\<br />Esta obra está bajo una \<a rel="license" href="[http://creativecommons.org/licenses/by-nc/4.0/"](http://creativecommons.org/licenses/by-nc/4.0/")Licencia Creative Commons Atribución-NoComercial 4.0 Internacional\</a>.
+<img src="https://www.enter.co/wp-content/uploads/2016/11/Atribuci%C3%B3n.png" width="133" height="47"/>
 
 ## Consultas, comentarios y coso
 
