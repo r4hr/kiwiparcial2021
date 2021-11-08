@@ -432,6 +432,5 @@ sueldos_dolar %>%
         plot.background = element_rect(fill = "#FBFCFC"),
         panel.background = element_blank(),
         panel.grid.major.x = element_line(color = "#AEB6BF"),
-        text = element_text(family = "Anaheim Normal"))
+        text = element_text(family = "Roboto"))
 
-ggsave(dpi = 600, filename = "sueldo_funcion.png")
