@@ -24,10 +24,28 @@ estilo <- theme(panel.grid = element_blank(),
                 panel.background = element_blank(),
                 text = element_text(family = "Roboto"))
 
+estiloh <- theme(panel.grid = element_blank(),
+                 plot.background = element_rect(fill = "#FBFCFC"),
+                 panel.background = element_blank(),
+                 panel.grid.major.y = element_line(color = "#AEB6BF"),
+                 text = element_text(family = "Roboto"))
+
+# Estilo limpio con líneas de referencia verticales en gris claro
+estilov <- theme(panel.grid = element_blank(),
+                 plot.background = element_rect(fill = "#FBFCFC"),
+                 panel.background = element_blank(),
+                 panel.grid.major.x = element_line(color = "#AEB6BF"),
+                 text = element_text(family = "Roboto"))
+
+
 fuente <- "Fuente: Encuesta KIWI de Sueldos de RRHH para Latam 2021"
 
 colores <-  c("#8624F5", "#1FC3AA")
 
+# Creo objetos para formatear las etiquetas numéricas de los ejes x e y
+eje_x_n <- scale_x_continuous(labels = comma_format(big.mark = ".", decimal.mark = ","))
+
+eje_y_n <- scale_y_continuous(labels = comma_format(big.mark = ".", decimal.mark = ","))
 
 # EDA -----
 
@@ -320,3 +338,100 @@ freelo %>%
        fill = "Es recruiter",
        y = "",
        caption = fuente)
+
+# Sueldo por función -----
+
+sueldos_dolar <- kiwi21 %>% 
+  filter(Trabajo !="Freelance") %>% 
+  select(puesto = `¿En qué puesto trabajás?`,
+         pais = `País en el que trabajas` ,
+         sueldo_bruto = `¿Cuál es tu remuneración BRUTA MENSUAL en tu moneda local? (antes de impuestos y deducciones)`,
+         tipo_contratacion = `Tipo de contratación`,
+         funcion = `¿Cuál es tu función principal en RRHH?`) %>% 
+  mutate(sueldo_bruto = as.numeric(unlist(sueldo_bruto)))
+
+
+sueldos_dolar <- sueldos_dolar %>% 
+  mutate(puesto = str_trim(puesto, side = "both")) %>% 
+  filter(!puesto %in% c("-", "Desarrollador", "Inspección de calidad", "Técnico"),
+         !funcion %in% c("Deberia poder marcarse mas de una opción aquí","Salud y Seguridad",
+                         "Formulación de proyectos"))
+
+
+# Agrego un multiplicador de sueldos para convertir los sueldos part time en full time
+sueldos_dolar <- sueldos_dolar %>% 
+  left_join(tc, by="pais") %>% 
+  mutate(multiplicador = 1, #if_else(contrato == "Part time", 1.5, 1),
+         sueldo = as.numeric(unlist(sueldo_bruto)),
+         sueldo_ft = sueldo * multiplicador,
+         sueldo_dolar = sueldo_ft/tipo_cambio,
+         cuenta = 1)
+
+
+# Estimamos percentiles 5 y 95 para usar valores más centrales
+# podamos todo lo que esté fuera de ese rango
+
+numericos <- funModeling::profiling_num(sueldos_dolar$sueldo_dolar)
+poda_p05 <- numericos[1,6]
+poda_p95 <- numericos[1,10]
+
+sueldos_dolar <- sueldos_dolar %>% 
+  filter(between(sueldo_dolar,
+                 poda_p05, poda_p95))
+
+## Limpieza de funciones ----
+
+unique(sueldos_dolar$funcion)
+
+sueldos_dolar <- sueldos_dolar %>% 
+  mutate(funcion = fct_collapse(funcion,
+                                "People Analytics" = c("HRIS", "People analytics",
+                                                       "Analista de datos - Operaciones",
+                                                       "Data scientist"),
+                                "Payroll" = c("Payroll / Liquidación de sueldos", 
+                                              "Administración personal, liquidación de sueldos",
+                                              "Coordinación de Procesos de Liquidación"),
+                                "Generalista" = c("Administración de RRHH, Comunicación Interna, Rexlutamientl dr Selección, Relaciones Laborales y RSE",
+                                                  "Analista gestión de RRHH", "Todos los anteriores", "De todo un poco por ser un equipo chico", 
+                                                  "todas las anteriores", "Gestión de los equipos de TH", "Todas las anteriores",
+                                                  "Asistente administrativo", "ADP, comunicación interna y Reclutamiento y selección",
+                                                  "Comunicación, Capacitación y RSE","Todo lo que tenga que ver con RR.HH",
+                                                  "Varias funciones", "Todos los departamentos",
+                                                  "RH y Gestión ( RH, RL, SO, CERTIFICACIONES"),
+                                "Reclutamiento" = c("Reclutamiento y selección",
+                                                    "Selección & Desarrollo"),
+                                "Diseño Organizacional" = c("Diseño organizacional",
+                                                            "Gestión Estrategica"),
+                                "Clima y Cultura" = c("Clima y cultura", "People Experience",
+                                                      "Candidate Experience")
+                                ))
+
+sueldos_dolar %>% 
+  count(funcion, sort = T)
+
+
+sueldos_dolar %>% 
+  filter(!funcion %in% c("Compliance", "Control de Gestión")) %>% 
+  group_by(funcion) %>% 
+  summarise(sueldo_promedio = mean(sueldo_dolar)) %>% 
+  mutate(relleno = if_else(funcion == "People Analytics", "a", "b")) %>% 
+  ggplot(aes(x = sueldo_promedio, y = reorder(funcion, sueldo_promedio),
+             fill = relleno)) +
+  geom_col() +
+  eje_x_n +
+  scale_fill_manual(values = c("#E4BB3F", "#85929E")) +
+  labs(title = "Sueldo promedio por función",
+       subtitle = "En U$S - Todos los países del relevamiento",
+       x = "Sueldo Promedio en U$S",
+       y = "",
+       fill = "",
+       caption = fuente) +
+  theme(plot.title.position = "plot",
+        legend.position = "none",
+        panel.grid = element_blank(),
+        plot.background = element_rect(fill = "#FBFCFC"),
+        panel.background = element_blank(),
+        panel.grid.major.x = element_line(color = "#AEB6BF"),
+        text = element_text(family = "Anaheim Normal"))
+
+ggsave(dpi = 600, filename = "sueldo_funcion.png")
