@@ -255,7 +255,7 @@ ggplot(trabajo_tipo, aes(ymax=ymax,
 # Preparación de datos
 
 sueldos_dolar <- kiwi21 %>% 
-  filter(Trabajo !="Freelance") %>% 
+  filter(Trabajo !="Freelance", `País en el que trabajas` != "España") %>% 
   select(genero = `Identidad de Género`, 
          puesto = `¿En qué puesto trabajás?`,
          pais = `País en el que trabajas` ,

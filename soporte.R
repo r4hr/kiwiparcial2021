@@ -142,11 +142,37 @@ htmltools::div(style='height:600px; overflow-y: scroll', gt(paises) %>%
 ## Sueldo promedio por país ----
 sueldos_dolar <- kiwi21 %>% 
   filter(Trabajo !="Freelance") %>% 
-  select(genero = Género, 
+  select(genero = `Identidad de Género`, 
          puesto = `¿En qué puesto trabajás?`,
          pais = `País en el que trabajas` ,
          sueldo_bruto = `¿Cuál es tu remuneración BRUTA MENSUAL en tu moneda local? (antes de impuestos y deducciones)`,
          tipo_contratacion = `Tipo de contratación`)
+
+
+
+sueldos_dolar <- sueldos_dolar %>% 
+  mutate(puesto = str_trim(puesto, side = "both")) %>% 
+  filter(!puesto %in% c("-", "Desarrollador", "Inspección de calidad", "Técnico"))
+
+sueldos_dolar <- sueldos_dolar %>% 
+  left_join(tc, by="pais") %>% 
+  mutate(multiplicador = 1, #if_else(contrato == "Part time", 1.5, 1),
+         sueldo = as.numeric(unlist(sueldo_bruto)),
+         sueldo_ft = sueldo * multiplicador,
+         sueldo_dolar = sueldo_ft/tipo_cambio,
+         cuenta = 1)
+
+
+glimpse(sueldos_dolar)
+
+sueldo_dolar_avg <- sueldos_dolar %>% 
+  filter(puesto %in% c("Gerente", "Jefe", "Responsable", "HRBP", "Analista", "Administrativo")) %>% 
+  mutate(puesto = factor(puesto,
+                         levels = c("Gerente", "Jefe", "Responsable", "HRBP", "Analista", "Administrativo"))) %>% 
+  group_by(puesto)# %>% 
+  #summarise(sueldo_dolar_promedio = mean(sueldo_dolar))
+
+sueldo_dolar_avg
 
 # Wordcloud ------
 
@@ -170,6 +196,7 @@ nombre <- nombre %>%
   group_by(word) %>% 
   tally(sort = T) 
 
+set.seed(99)
 wordcloud(words = nombre$word, freq = nombre$n, random.order = F,
           rot.per = 0.35, scale= c(2.5,1), max.words = 200, colors=brewer.pal(8, "Dark2"))
 
@@ -355,7 +382,7 @@ sueldos_dolar <- sueldos_dolar %>%
   mutate(puesto = str_trim(puesto, side = "both")) %>% 
   filter(!puesto %in% c("-", "Desarrollador", "Inspección de calidad", "Técnico"),
          !funcion %in% c("Deberia poder marcarse mas de una opción aquí","Salud y Seguridad",
-                         "Formulación de proyectos"))
+                         "Formulación de proyectos", "No trabajo en RRHH", "Customer"))
 
 
 # Agrego un multiplicador de sueldos para convertir los sueldos part time en full time
@@ -391,12 +418,13 @@ sueldos_dolar <- sueldos_dolar %>%
                                 "Payroll" = c("Payroll / Liquidación de sueldos", 
                                               "Administración personal, liquidación de sueldos",
                                               "Coordinación de Procesos de Liquidación"),
-                                "Generalista" = c("Administración de RRHH, Comunicación Interna, Rexlutamientl dr Selección, Relaciones Laborales y RSE",
+                                "Generalista" = c("Todo menos payroll", "Administración de RRHH, Comunicación Interna, Rexlutamientl dr Selección, Relaciones Laborales y RSE",
                                                   "Analista gestión de RRHH", "Todos los anteriores", "De todo un poco por ser un equipo chico", 
                                                   "todas las anteriores", "Gestión de los equipos de TH", "Todas las anteriores",
                                                   "Asistente administrativo", "ADP, comunicación interna y Reclutamiento y selección",
                                                   "Comunicación, Capacitación y RSE","Todo lo que tenga que ver con RR.HH",
                                                   "Varias funciones", "Todos los departamentos",
+                                                  "de todo un poco..!", "Todas las áreas integrales de RH",
                                                   "RH y Gestión ( RH, RL, SO, CERTIFICACIONES"),
                                 "Reclutamiento" = c("Reclutamiento y selección",
                                                     "Selección & Desarrollo"),
@@ -433,4 +461,5 @@ sueldos_dolar %>%
         panel.background = element_blank(),
         panel.grid.major.x = element_line(color = "#AEB6BF"),
         text = element_text(family = "Roboto"))
+
 
