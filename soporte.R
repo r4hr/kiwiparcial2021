@@ -431,7 +431,9 @@ sueldos_dolar <- sueldos_dolar %>%
                                 "Diseño Organizacional" = c("Diseño organizacional",
                                                             "Gestión Estrategica"),
                                 "Clima y Cultura" = c("Clima y cultura", "People Experience",
-                                                      "Candidate Experience")
+                                                      "Candidate Experience"),
+                                "Capacitación y desarrollo" = c("Capacitación y desarrollo",
+                                                                "Desarrollo de talento")
                                 ))
 
 sueldos_dolar %>% 
@@ -442,12 +444,23 @@ sueldos_dolar %>%
   filter(!funcion %in% c("Compliance", "Control de Gestión")) %>% 
   group_by(funcion) %>% 
   summarise(sueldo_promedio = mean(sueldo_dolar)) %>% 
-  mutate(relleno = if_else(funcion == "People Analytics", "a", "b")) %>% 
-  ggplot(aes(x = sueldo_promedio, y = reorder(funcion, sueldo_promedio),
-             fill = relleno)) +
-  geom_col() +
+#  mutate(relleno = if_else(funcion == "People Analytics", "a", "b")) %>% 
+  ggplot(aes(x = sueldo_promedio, y = reorder(funcion, sueldo_promedio))) +
+  geom_col(fill = "#839192") +
   eje_x_n +
-  scale_fill_manual(values = c("#E4BB3F", "#85929E")) +
+  geom_vline(xintercept = mean(sueldos_dolar$sueldo_dolar), color = "#0955F7", linetype = 2, size = 0.8) +
+  geom_text(aes(label = paste0("U$S ", round(sueldo_promedio))),
+            size = 3,
+            family = "Roboto",
+            color = "white", 
+            hjust = 1.2) +
+  annotate("text", label = paste0("Promedio","\nU$S ",round(mean(sueldos_dolar$sueldo_dolar))),
+           x = mean(sueldos_dolar$sueldo_dolar)+180,
+           y = "Relaciones laborales", 
+           family = "Roboto",
+           color = "#0955F7",
+           size = 4) +
+#  scale_fill_manual(values = c("#E4BB3F", "#85929E")) +
   labs(title = "Sueldo promedio por función",
        subtitle = "En U$S - Todos los países del relevamiento",
        x = "Sueldo Promedio en U$S",
@@ -460,6 +473,6 @@ sueldos_dolar %>%
         plot.background = element_rect(fill = "#FBFCFC"),
         panel.background = element_blank(),
         panel.grid.major.x = element_line(color = "#AEB6BF"),
-        text = element_text(family = "Roboto"))
+        text = element_text(family = "Roboto")) 
 
 
