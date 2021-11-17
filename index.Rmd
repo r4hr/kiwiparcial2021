@@ -291,14 +291,14 @@ poda_p05 <- numericos[1,6]
 poda_p95 <- numericos[1,10]
 
 mediana_pais <- sueldos_dolar %>% 
-  filter(pais %in% c("Argentina", "Perú", "Costa Rica", "Bolivia", "Uruguay",  "Chile", "México"),
+  filter(pais %in% c("Argentina", "Perú", "Costa Rica", "Bolivia", "Uruguay",  "Chile", "México", "Paraguay"),
          between(sueldo_dolar, poda_p05, poda_p95)) %>% 
   group_by(pais) %>% 
   summarise(sueldop = list(mean_se(sueldo_dolar))) %>% 
   unnest(cols = c(sueldop))
 
 sueldo_dolar_pais <- sueldos_dolar %>% 
-  filter(pais %in% c("Argentina", "Perú", "Costa Rica", "Bolivia", "Uruguay",  "Chile", "México"), 
+  filter(pais %in% c("Argentina", "Perú", "Costa Rica", "Bolivia", "Uruguay",  "Chile", "México", "Paraguay"), 
          between(sueldo_dolar, poda_p05 ,poda_p95))
   
 
@@ -308,7 +308,8 @@ ggplot(mediana_pais, aes(reorder(pais, -y), y =  y))+
   geom_col(fill = "#344D7E", alpha = 0.85) +
   geom_errorbar(aes(ymin = ymin,ymax = ymax), position = "dodge", color = "#333e47")+
   geom_point(data = sueldo_dolar_pais, aes(x = pais, y = sueldo_dolar), 
-             alpha = 0.3, size = 2, color = "#75838F")+
+             alpha = 0.3, size = 2, color = "#75838F",
+             position = position_jitter(width = 0.15))+
   geom_text(aes(label = comma(round(x=y, 0), big.mark = ".", 
                               decimal.mark = ","),
                 vjust = 1.5, fontface = "bold"), 
@@ -327,7 +328,7 @@ ggplot(mediana_pais, aes(reorder(pais, -y), y =  y))+
 
 .pull-right[
 **Aclaraciones:** 
-1. Los resultados **no son representativos en absoluto** dada la baja cantidad de respuestas (cada punto representa una respuesta).
+1. Los resultados **no son representativos** de la realidad de los países dada la baja cantidad de respuestas (cada punto representa una respuesta).
 2. Para la comparación de los sueldos en dólares estadounidenses tomamos el tipo de cambio de cada país al 29 de octubre de 2021 publicados por los respectivos bancos centrales.
 3. Sólo mostramos resultados de los países con al menos 5 respuestas.
 4. Podamos los sueldos para mostrar aquellos que están dentro de los percentiles 5 y 95.
@@ -423,7 +424,7 @@ sueldos_dolar <- sueldos_dolar %>%
                                                   "todas las anteriores", "Gestión de los equipos de TH", "Todas las anteriores",
                                                   "Asistente administrativo", "ADP, comunicación interna y Reclutamiento y selección",
                                                   "Comunicación, Capacitación y RSE","Todo lo que tenga que ver con RR.HH",
-                                                  "Varias funciones", "Todos los departamentos",
+                                                  "Varias funciones", "Todos los departamentos", 
                                                   "de todo un poco..!", "Todas las áreas integrales de RH",
                                                   "RH y Gestión ( RH, RL, SO, CERTIFICACIONES"),
                                 "Reclutamiento" = c("Reclutamiento y selección",
@@ -433,7 +434,8 @@ sueldos_dolar <- sueldos_dolar %>%
                                 "Clima y Cultura" = c("Clima y cultura", "People Experience",
                                                       "Candidate Experience"),
                                 "Capacitación y desarrollo" = c("Capacitación y desarrollo",
-                                                                "Desarrollo de talento")
+                                                                "Desarrollo de talento",
+                                                                "Generalista soft")
                                 ))
 
 sueldos_dolar <- sueldos_dolar %>% 
@@ -442,7 +444,7 @@ sueldos_dolar <- sueldos_dolar %>%
 
 En el siguiente gráfico podemos apreciar los salarios promedios según las distintas funciones que existen en el área.
 
-La línea punteada indica el sueldo promedio en dólares en RRHH de toda la muestra de datos que es de `r emo::ji("dollar")` `r paste0("U$S ", round(mean(sueldos_dolar$sueldo_dolar)))`.
+La línea punteada indica el sueldo promedio en dólares en RRHH de toda la muestra de datos que es de `r emo::ji("dollar")` `r paste0("U$S ", comma(round(mean(sueldos_dolar$sueldo_dolar)),  big.mark = ".", decimal.mark = ","))`.
 ]
 
 .pull-right[
@@ -458,7 +460,9 @@ sueldos_dolar %>%
              color = "#0955F7",
              linetype = 2,
              size = 0.8) +
-    geom_text(aes(label = paste0("U$S ", round(sueldo_promedio))),
+    geom_text(aes(label = paste0("U$S ", comma(round(sueldo_promedio),
+                                               big.mark = ".",
+                                               decimal.mark = ",",accuracy = 1))),
             size = 3,
             family = "Roboto",
             color = "white", 
